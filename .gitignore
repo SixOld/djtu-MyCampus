@@ -1,0 +1,6 @@
+dist
+node_modules
+.wepy*
+.vscode
+.idea
+src/config/index.js
