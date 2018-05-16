@@ -154,25 +154,29 @@
         <view>开始ip</view>
         <view>{{message[0].name}}</view>
       </view>
-      <view class="thead row">
+      <view class="row">
         <view>结束ip</view>
-        <view>{{message[0].name}}</view>
+        <view>{{message[1].name}}</view>
       </view>
-      <view class="thead row">
-        <view>mask</view>
-        <view>{{message[0].name}}</view>
+      <view class="row">
+        <view>Subnet</view>
+        <view>{{message[2].name}}</view>
       </view>
-      <view class="thead row">
+      <view class="row">
         <view>gateway</view>
-        <view>{{message[0].name}}</view>
+        <view>{{message[3].name}}</view>
       </view>
-      <view class="thead row">
+      <view class="row">
         <view>dns1</view>
-        <view>{{message[0].name}}</view>
+        <view>{{message[4].name}}</view>
       </view>
-      <view class="thead row">
+      <view class="row">
         <view>dns2</view>
-        <view>{{message[0].name}}</view>
+        <view>{{message[5].name}}</view>
+      </view>
+      <view class="row">
+        <view>tongji</view>
+        <view>{{message[6].name}}</view>
       </view>
     </view>
   </view>
@@ -270,9 +274,9 @@
         if (this.room.roomid == 0) {
           this.ShowToast('寝室号必填！')
           return
-        }
-        this.data.hidden[0].value = "show"
-        this.Room(this.room)
+        }        
+       	this.Room(this.room)
+       	this.data.hidden[0].value = "show"
       }
     }
     watch = {
@@ -288,7 +292,14 @@
     }
     async Room(params) {
       try {
-      	const res = await this.POST('/selectip',{"roomid":this.chooseStr})
+      	const res = await this.POST('/selectip',{"room":this.chooseStr})
+      	this.data.message[0].name = res.start_ip
+      	this.data.message[1].name = res.end_ip
+      	this.data.message[2].name = res.Subnet
+      	this.data.message[3].name = res.gateway
+      	this.data.message[4].name = res.FDNS
+      	this.data.message[5].name = res.SDNS
+      	this.data.message[6].name = res.tongji
       } catch (error) {
         console.log(error);
       }
@@ -311,7 +322,19 @@
         }]
       ],
       message:[{
-      	name:"192.168.1.1"
+      	name:""
+      },{
+      	name:""
+      },{
+      	name:""
+      },{
+      	name:""
+      },{
+      	name:""
+      },{
+      	name:""
+      },{
+      	name:""
       }],
       hidden:[{
       	value:"hide"

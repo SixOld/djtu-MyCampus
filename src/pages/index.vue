@@ -104,7 +104,7 @@
     </view>
     <!-- 卡片区, 置放通知卡片, 例如: 成绩通知, 课程通知, 自习教室, 考试通知 -->
     <view wx:if="{{verify > 0}}">
-      
+     
     </view>
     <empty wx:else msg="尚未绑定账号"></empty>
   </view>
@@ -122,7 +122,10 @@
     config = {};
     components = {
       "mview": MView,
+      "schedule-card": Card,
+      "book-card": Card,
       "ecard": Card,
+      "exam-card": Card,
       "empty": Empty
     }
     mixins = [HttpMixin]
@@ -133,7 +136,7 @@
       }],
       funcs: index.funcs,
       swiper_height: 200,
-    }
+    };
     computed = {
       verify() {
         return db.Get('verify')
@@ -146,6 +149,32 @@
           return []
         }
       },
+      exams() {
+        let arr = db.Get("exams")
+        let data = []
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i].t >= 0) data.push(e)
+        }
+        return data
+      },
+      loanBooks() {
+        return db.Get("loan_now")
+      },
+      todaySchedules() {
+        let schedules = db.Get('schedules')
+        if (!schedules) {
+          return
+        }
+        const todaySchedule = []
+        let today = new Date().getDay() || 7
+        schedules[today].forEach(e => {
+          if (e.course_name) {
+            todaySchedule.push(e)
+          }
+        })
+        return todaySchedule
+      }
+    }
     navigate(item) {
       let url = item.url
       if (item.type == 'login' && this.verify == 0) {
@@ -166,18 +195,17 @@
           url: url
         })
       }
-    },
+    }
     methods = {
       to(item) {
         this.navigate(item)
       }
-    },
+    };
     onLoad() {
       // 设置swipe高度 2:1
       this.swiper_height = wepy.getSystemInfoSync().windowWidth / 2
-      //this.getNotice()
       // this.notices = []
-    },
+    }
     onShareAppMessage(options) {
       return {}
     }

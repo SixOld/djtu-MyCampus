@@ -106,7 +106,7 @@
   import HttpMixin from "mixins/http";
   import ToastMixin from "mixins/toast";
   import db from "util/db";
-  export default class RechargeJwc extends wepy.page {
+  export default class Recharge extends wepy.page {
     config = {
       navigationBarTitleText: ''
     };

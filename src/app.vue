@@ -20,9 +20,6 @@
         'pages/recharge',
         'pages/demand',
         'pages/my/my',
-        'pages/my/feedback',
-        'pages/my/feedbackList',
-        'pages/my/feedbackDetail',
       ],
       window: {
         navigationBarBackgroundColor: '#f06292',
