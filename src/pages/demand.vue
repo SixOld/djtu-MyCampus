@@ -77,7 +77,7 @@
 	      </view>
 	      <view class="row">
 	        <view>账号</view>
-	        <view>{{trans.code}}</view>
+	        <view>{{trans.accountId}}</view>
 	      </view>
 	      <view class="row">
 	        <view>流量详情</view>

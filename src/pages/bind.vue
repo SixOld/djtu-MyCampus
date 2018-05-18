@@ -131,7 +131,7 @@
       try {
       	params.openid = db.Get("openid")
       	params= JSON.stringify(params)
-        const res = await this.POST('/binding',params)
+        const res = await this.POST('/bindwx',params)
         if(res.status === 1){
         	db.Set('token', res.token)
         	db.Set('verify', res.verify)

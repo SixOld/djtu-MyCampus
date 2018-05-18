@@ -68,8 +68,44 @@ export default class HttpMixin extends wepy.mixin {
           if (showToast) {this.ShowToast('success')}
           resolve(res.data)
         } 
-        else if(res.data.status === 0){
-        	if (showToast) {this.ShowToast("密码错误")}
+        else if (res.data.errorCode === 101) {
+          if (showToast) {this.ShowToast('未知错误')}
+          resolve(res.data)
+        } 
+        else if(res.data.errorCode === 102){
+        	if (showToast) {this.ShowToast("没有该房间号")}
+          reject(res)
+        }
+        else if(res.data.errorCode === 103){
+          if (showToast) {this.ShowToast("用户已经绑定微信小程序")}
+          reject(res)
+        }
+        else if(res.data.errorCode === 104){
+          if (showToast) {this.ShowToast("绑定账号的用户名或者密码错误")}
+          reject(res)
+        }
+        else if(res.data.errorCode === 105){
+          if (showToast) {this.ShowToast("账号没有绑定")}
+          reject(res)
+        }
+        else if(res.data.errorCode === 106){
+          if (showToast) {this.ShowToast("信息查询错误")}
+          reject(res)
+        }
+        else if(res.data.errorCode === 107){
+          if (showToast) {this.ShowToast("账号没有IP可以解绑")}
+          reject(res)
+        }
+        else if(res.data.errorCode === 108){
+          if (showToast) {this.ShowToast("解绑ip错误")}
+          reject(res)
+        }
+        else if(res.data.errorCode === 109){
+          if (showToast) {this.ShowToast("非法访问")}
+          reject(res)
+        }
+        else if(res.data.errorCode === "30014"){
+          if (showToast) {this.ShowToast("充值卡不存在")}
           reject(res)
         }
         else {

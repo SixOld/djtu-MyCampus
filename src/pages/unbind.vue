@@ -68,7 +68,6 @@
       border-color: @base-color;
       margin: auto 20rpx;
       position: absolute;
-      bottom: 2rem;
       width: calc(~"100% - 40rpx");
     }
     form {
@@ -83,11 +82,11 @@
 
 <template>
   <view id="unbind">
-    <form @submit="unbind">
-    	<view class="help">
-        <view>解绑成功一天后才能再次解绑</view>
-      </view>
-      <button formType="submit">解绑</button>
+    <form @submit="unbindwx">
+      <button formType="submit">解绑微信</button>
+    </form>
+    <form @submit="unbindip">
+      <button formType="submit">解绑IP</button>
     </form>
   </view>
 </template>
@@ -97,24 +96,39 @@
   import HttpMixin from "mixins/http";
   import ToastMixin from "mixins/toast";
   import db from "util/db"
-  export default class UnbindJwc extends wepy.page {
+  export default class Unbind extends wepy.page {
     config = {
       navigationBarTitleText: ''
     }
     mixins = [HttpMixin, ToastMixin]
     components = {}
     methods = {
-      unbind() {
-        this.Unbind()
+      unbindwx() {
+        this.Unbindwx()
+      },
+      unbindip() {
+        this.UnbindIP()
       }
     }
-    async Unbind() {
+    async Unbindwx() {
       try {
       	const openid = db.Get('openid')
-        const res = await this.POST('/unbind',{"openid":openid})
+        const res = await this.POST('/unbindwx',{"openid":openid})
         this.ShowToast('成功')
         db.Set('token',res.token)
         db.Set('verify',res.verify)
+        wepy.navigateBack({
+          delta: 1
+        })
+      } catch (error) {
+        console.log(error);
+      }      
+    }
+    async UnbindIP() {
+      try {
+        const openid = db.Get('openid')
+        const res = await this.POST('/unbindip',{"openid":openid})
+        this.ShowToast('成功')
         wepy.navigateBack({
           delta: 1
         })
