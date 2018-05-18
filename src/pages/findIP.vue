@@ -152,31 +152,31 @@
     <view class="{{hidden[0].value}}">
       <view class="row">
         <view>开始ip</view>
-        <view>{{message[0].name}}</view>
+        <view>{{res.start_ip}}</view>
       </view>
       <view class="row">
         <view>结束ip</view>
-        <view>{{message[1].name}}</view>
+        <view>{{res.end_ip}}</view>
       </view>
       <view class="row">
         <view>Subnet</view>
-        <view>{{message[2].name}}</view>
+        <view>{{res.Subnet}}</view>
       </view>
       <view class="row">
         <view>gateway</view>
-        <view>{{message[3].name}}</view>
+        <view>{{res.gateway}}</view>
       </view>
       <view class="row">
         <view>dns1</view>
-        <view>{{message[4].name}}</view>
+        <view>{{res.SDNS}}</view>
       </view>
       <view class="row">
         <view>dns2</view>
-        <view>{{message[5].name}}</view>
+        <view>{{res.FDNS}}</view>
       </view>
       <view class="row">
         <view>tongji</view>
-        <view>{{message[6].name}}</view>
+        <view>{{res.tongji}}</view>
       </view>
     </view>
   </view>
@@ -293,13 +293,7 @@
     async Room(params) {
       try {
       	const res = await this.POST('/selectip',{"room":this.chooseStr})
-      	this.data.message[0].name = res.start_ip
-      	this.data.message[1].name = res.end_ip
-      	this.data.message[2].name = res.Subnet
-      	this.data.message[3].name = res.gateway
-      	this.data.message[4].name = res.FDNS
-      	this.data.message[5].name = res.SDNS
-      	this.data.message[6].name = res.tongji
+      	this.res = res
       } catch (error) {
         console.log(error);
       }
@@ -321,21 +315,7 @@
           value: "aien"
         }]
       ],
-      message:[{
-      	name:""
-      },{
-      	name:""
-      },{
-      	name:""
-      },{
-      	name:""
-      },{
-      	name:""
-      },{
-      	name:""
-      },{
-      	name:""
-      }],
+      res:[],
       hidden:[{
       	value:"hide"
       }],

@@ -68,28 +68,28 @@
     <view class="ulli">
       <view class="table">
 	      <view class="row">
-	        <view>开始ip</view>
-	        <view>{{range[0] [choose[0]].name}}</view>
+	        <view>开始时间</view>
+	        <view>{{trans.LimitTime}}</view>
 	      </view>
 	      <view class="row">
-	        <view>结束ip</view>
-	        <view>{{range[0] [choose[0]].name}}</view>
+	        <view>结束时间</view>
+	        <view>{{trans.LimitTime}}</view>
 	      </view>
 	      <view class="row">
-	        <view>mask</view>
-	        <view>{{range[0] [choose[0]].name}}</view>
+	        <view>账号</view>
+	        <view>{{trans.code}}</view>
 	      </view>
 	      <view class="row">
-	        <view>gateway</view>
-	        <view>{{range[0] [choose[0]].name}}</view>
+	        <view>流量详情</view>
+	        <view>{{trans.flow}}</view>
 	      </view>
 	      <view class="row">
-	        <view>dns1</view>
-	        <view>{{range[0] [choose[0]].name}}</view>
+	        <view>套餐</view>
+	        <view>{{trans.packageName}}</view>
 	      </view>
 	      <view class="row">
-	        <view>dns2</view>
-	        <view>{{range[0] [choose[0]].name}}</view>
+	        <view>姓名</view>
+	        <view>{{trans.userName}}</view>
 	      </view>
 	    </view>
     </view>
