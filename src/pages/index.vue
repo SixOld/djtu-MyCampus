@@ -199,7 +199,7 @@
       to(item) {
         this.navigate(item)
       }
-    };
+    }
     onLoad() {
       // 设置swipe高度 2:1
       this.swiper_height = wepy.getSystemInfoSync().windowWidth / 2

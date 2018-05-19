@@ -94,7 +94,7 @@
       </view>
       <view class="input-group" hover-class="active">
         <text class="input-label">密码</text>
-        <input name="cardpwd" type="password" placeholder="请输入充值卡的密码" />
+        <input name="cardpwd" type="number" placeholder="请输入充值卡的密码" />
       </view>
       <button formType="submit">充值</button>
     </form>
@@ -119,7 +119,7 @@
           this.ShowToast('卡号密码必填！')
           return
         }
-        if ( params.userAccount.indexOf(">") >= 0|| params.userAccount.indexOf("<") >= 0|| params.cardno.indexOf("<") >= 0|| params.cardno.indexOf(">") >= 0) {
+        if ( params.userAccount.indexOf(">") >= 0|| params.userAccount.indexOf("<") >= 0|| params.cardno.indexOf("<") >= 0|| params.cardno.indexOf(">") >= 0||params.cardpwd.indexOf(">") >= 0|| params.cardpwd.indexOf("<") >= 0) {
           this.ShowToast('小伙子你不乖哦，有想法的话联系我们一起干怎么样')
           return
         }

@@ -1,6 +1,7 @@
 <style lang="less">
   @import "./src/less/config";
   page {
+  	background-image: url("https://scuplus.oss-cn-shenzhen.aliyuncs.com/bg/bus.png");
     background-position: 50% calc(~"100% + 380rpx");
     background-repeat: no-repeat;
     background-size: 100%;
@@ -289,8 +290,8 @@
     }
     onLoad() {
       this.choose = db.Get("roomChoose") || [0, 0]
-      this.room = db.Get("room")
       this.changeColumn(this.choose[0])
+      this.room = db.Get("room")
       this.height = wx.getSystemInfoSync().windowHeight - 80
     }
     async Room(params) {

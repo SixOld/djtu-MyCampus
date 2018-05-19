@@ -14,13 +14,6 @@ const funcs = [
     type: 'login'
   },
   {
-    name: '解绑ip',
-    url: 'unbindip',
-    icon: '',
-    bg: '#99ccee',
-    type: 'login'
-  },
-  {
     name: '查ip',
     url: 'findIP',
     icon: '',

@@ -75,12 +75,29 @@
       height: calc(~"60% - 1rem");
       background: #fefefe;
     }
+   	.row {
+      background: #efefef;
+      box-shadow: 4rpx 4rpx 8rpx #ddd;
+      &:nth-child(1) {
+        background: #efefef;
+      }
+      margin-top: 0.5rem;
+      display: flex;
+      view {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0.2rem;
+      }
+    }
   }
 </style>
 
 <template>
   <view id="unbind">
     <form @submit="unbindip">
+    	<view class="row">{{user[0].value}}</view>
       <button formType="submit">解绑IP</button>
     </form>
   </view>
@@ -99,7 +116,7 @@
     components = {}
     data={
     	trans : [],
-    	user:[]
+    	user:[{value:db.Get("user")}]
     }
     methods = {
       unbindip() {

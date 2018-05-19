@@ -124,15 +124,7 @@
     }
     async getToken() {
       let token = db.Get('token')
-      if (!token) {
-        this.login()
-      } else {
-        try {
-          await this.checkSession()
-        } catch (error) {
-          this.login()
-        }
-      }
+      this.login()
     }
   };
 </script>
