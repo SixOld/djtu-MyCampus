@@ -63,13 +63,11 @@
       }
     }
     button {
-      background: @base-color;
-      color: #fff;
-      border-color: @base-color;
-      margin: auto 20rpx;
-      position: absolute;
-      width: calc(~"100% - 40rpx");
-    }
+	    background: rgba(255, 255, 255, 0.15);
+	    color: #000000;
+	    border-color: @base-color;
+	    margin: 20rpx; // width: calc(~"100% - 40rpx");
+	  }
     form {
       padding-top: 1rem;
       display: block;
@@ -85,9 +83,6 @@
     <form @submit="unbindwx">
       <button formType="submit">解绑微信</button>
     </form>
-    <form @submit="unbindip">
-      <button formType="submit">解绑IP</button>
-    </form>
   </view>
 </template>
 
@@ -96,18 +91,15 @@
   import HttpMixin from "mixins/http";
   import ToastMixin from "mixins/toast";
   import db from "util/db"
-  export default class Unbind extends wepy.page {
+  export default class Unbindwx extends wepy.page {
     config = {
-      navigationBarTitleText: ''
+      navigationBarTitleText: '解绑微信'
     }
     mixins = [HttpMixin, ToastMixin]
     components = {}
     methods = {
       unbindwx() {
         this.Unbindwx()
-      },
-      unbindip() {
-        this.UnbindIP()
       }
     }
     async Unbindwx() {
@@ -123,18 +115,6 @@
       } catch (error) {
         console.log(error);
       }      
-    }
-    async UnbindIP() {
-      try {
-        const openid = db.Get('openid')
-        const res = await this.POST('/unbindip',{"openid":openid})
-        this.ShowToast('成功')
-        wepy.navigateBack({
-          delta: 1
-        })
-      } catch (error) {
-        console.log(error);
-      }
     }
   }
 </script>

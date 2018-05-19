@@ -15,15 +15,16 @@
       pages: [
         'pages/index',
         'pages/bind',
-        'pages/unbind',
+        'pages/unbindwx',
+        'pages/unbindip',
         'pages/findIP',
         'pages/recharge',
         'pages/demand',
         'pages/my/my',
       ],
       window: {
-        navigationBarBackgroundColor: '#f06292',
-        navigationBarTextStyle: '#fff',
+        navigationBarBackgroundColor: '#ffffff',
+        navigationBarTextStyle: 'black',
         navigationBarTitleText: '我的交大',
         backgroundColor: '#dddddd'
       },

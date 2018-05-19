@@ -14,26 +14,9 @@ export default class HttpMixin extends wepy.mixin {
   }
 
   async requestWithBind(method, url, params = {}, showToast = true, handler = {}) {
-    if (db.Get('verify') === 0) {
-      wepy.showModal({
-        title: '绑定',
-        content: '统一认证平台未绑定或密码错误，是否跳转到绑定页面？',
-        success: function (res) {
-          if (res.confirm) {
-            wepy.navigateTo({
-              url: '/pages/bind'
-            })
-          } else if (res.cancel) {
-            wepy.navigateBack({
-              delta: 1
-            })
-          }
-        }
-      })
-      throw '未绑定账号'
-    } else {
+    
       return this.request(method, url, params, showToast, handler)
-    }
+    
   }
 
   // GET请求

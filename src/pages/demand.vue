@@ -3,27 +3,13 @@
     background: #efefef;
     padding-bottom: 20rpx;
   }
-  .card {
-    margin: 0 1.5rem;
-    border-radius: 0.5rem;
-    box-shadow: 4rpx 4rpx 20rpx #a82413;
-    background-image: url("https://scuplus.oss-cn-shenzhen.aliyuncs.com/ecard/1.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .money {
-      margin-top: -4rem;
-      color: #fff;
-      font-size: 2.3rem;
-    }
-  }
   .title {
     margin: 0.5rem 1rem;
     color: #888;
     font-size: 0.8rem;
+  }
+  .hidden{
+  	display: none;
   }
   .table {
     padding: 0.5rem;
@@ -66,7 +52,7 @@
   <view>
     <!-- 上网数据 -->
     <view class="ulli">
-      <view class="table">
+      <view class="{{hidden[0].value}}">
 	      <view class="row">
 	        <view>开始时间</view>
 	        <view>{{trans.LimitTime}}</view>
@@ -106,14 +92,17 @@
   export default class Demand extends wepy.page {
     config = {
       navigationBarTitleText: '我的校园网',
-      navigationBarBackgroundColor: '#b92c18',
+      navigationBarBackgroundColor: '#efefef',
       enablePullDownRefresh: true
     }
     mixins = [EcardMixin, HttpMixin, ToastMixin, DataMixin]
     components = {}
     data = {
       height: 0,
-      trans: []
+      trans: [],
+      hidden:[{
+      	value:"hidden"
+      }],
     }
     computed = {
     }
@@ -131,6 +120,9 @@
       	const openid = db.Get("openid")
         let trans = await this.PostWithBind('/myinfo',{"openid":openid})
         this.trans = trans
+        if(trans.status === 1){
+ 	       	this.data.hidden[0].value = "table"
+        }
         this.$apply()
         this.InitSet("trans", trans)
       } catch (error) {

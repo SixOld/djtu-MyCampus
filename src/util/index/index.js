@@ -14,8 +14,8 @@ const funcs = [
     type: 'login'
   },
   {
-    name: '解绑',
-    url: 'unbind',
+    name: '解绑ip',
+    url: 'unbindip',
     icon: '',
     bg: '#99ccee',
     type: 'login'
@@ -25,7 +25,7 @@ const funcs = [
     url: 'findIP',
     icon: '',
     bg: '#99ccee',
-    type: 'normal'
+    type: 'login'
   },
 /*{
     name: '课程表',

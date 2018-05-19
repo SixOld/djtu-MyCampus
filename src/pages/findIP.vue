@@ -1,7 +1,6 @@
 <style lang="less">
   @import "./src/less/config";
   page {
-    background-image: url("https://scuplus.oss-cn-shenzhen.aliyuncs.com/bg/bus.png");
     background-position: 50% calc(~"100% + 380rpx");
     background-repeat: no-repeat;
     background-size: 100%;
@@ -191,6 +190,7 @@
   export default class Find extends wepy.page {
     config = {
       navigationBarBackgroundColor: '#ab96c5',
+      navigationBarTitleText: '查ip'
     }
     mixins = [DataMixin,HttpMixin,ToastMixin]
     changeColumn(v) {
@@ -274,9 +274,12 @@
         if (this.room.roomid == 0) {
           this.ShowToast('寝室号必填！')
           return
-        }        
+        }
+        if ( this.room.roomid.indexOf(">") >= 0|| this.room.roomid.indexOf("<") >= 0) {
+          this.ShowToast('小伙子你不乖哦，有想法的话联系我们一起干怎么样')
+          return
+        }
        	this.Room(this.room)
-       	this.data.hidden[0].value = "show"
       }
     }
     watch = {
@@ -294,6 +297,9 @@
       try {
       	const res = await this.POST('/selectip',{"room":this.chooseStr})
       	this.res = res
+      	if(res.status === 1){
+       		this.data.hidden[0].value = "show"
+       	}
       } catch (error) {
         console.log(error);
       }

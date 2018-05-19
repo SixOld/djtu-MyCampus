@@ -73,6 +73,9 @@
         {
           name: "账号绑定",
           url: "/pages/bind"
+        },{
+          name: "账号解绑",
+          url: "/pages/unbindwx"
         }
       ],
       nickName: "未授权",

@@ -104,7 +104,6 @@
     </view>
     <!-- 卡片区, 置放通知卡片, 例如: 成绩通知, 课程通知, 自习教室, 考试通知 -->
     <view wx:if="{{verify > 0}}">
-     
     </view>
     <empty wx:else msg="尚未绑定账号"></empty>
   </view>

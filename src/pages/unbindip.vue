@@ -42,7 +42,7 @@
       color: #ccc;
     }
   }
-  #recharge {
+  #unbind {
     height: 100%;
     #title {
       width: 100%;
@@ -63,14 +63,11 @@
       }
     }
     button {
-      background: @base-color;
-      color: #fff;
-      border-color: @base-color;
-      margin: auto 20rpx;
-      position: absolute;
-      bottom: 2rem;
-      width: calc(~"100% - 40rpx");
-    }
+	    background: rgba(255, 255, 255, 0.15);
+	    color: #000000;
+	    border-color: @base-color;
+	    margin: 20rpx; // width: calc(~"100% - 40rpx");
+	  }
     form {
       padding-top: 1rem;
       display: block;
@@ -82,57 +79,38 @@
 </style>
 
 <template>
-  <view id="recharge">
-    <form @submit="recharge">
-    	<view class="input-group" hover-class="active">
-        <text class="input-label">账号</text>
-        <input name="userAccount" type="number" placeholder="请输入您要充值的账号" />
-      </view>
-      <view class="input-group" hover-class="active">
-        <text class="input-label">卡号</text>
-        <input name="cardno" type="text" placeholder="请输入您的充值卡号" />
-      </view>
-      <view class="input-group" hover-class="active">
-        <text class="input-label">密码</text>
-        <input name="cardpwd" type="password" placeholder="请输入充值卡的密码" />
-      </view>
-      <button formType="submit">充值</button>
+  <view id="unbind">
+    <form @submit="unbindip">
+      <button formType="submit">解绑IP</button>
     </form>
   </view>
 </template>
 
 <script>
-  import wepy from 'wepy'
+  import wepy from 'wepy';
   import HttpMixin from "mixins/http";
   import ToastMixin from "mixins/toast";
-  import db from "util/db";
-  export default class Recharge extends wepy.page {
+  import db from "util/db"
+  export default class Unbindip extends wepy.page {
     config = {
-      navigationBarTitleText: ''
-    };
+      navigationBarTitleText: "解绑IP"
+    }
     mixins = [HttpMixin, ToastMixin]
     components = {}
+    data={
+    	trans : [],
+    	user:[]
+    }
     methods = {
-      recharge(e) {
-        let params = e.detail.value
-        if (params.userAccount == 0 ||params.cardno == 0 || params.cardpwd == '') {
-          this.ShowToast('卡号密码必填！')
-          return
-        }
-        if ( params.userAccount.indexOf(">") >= 0|| params.userAccount.indexOf("<") >= 0|| params.cardno.indexOf("<") >= 0|| params.cardno.indexOf(">") >= 0) {
-          this.ShowToast('小伙子你不乖哦，有想法的话联系我们一起干怎么样')
-          return
-        }
-        this.Recharge(params)
+      unbindip() {
+        this.UnbindIP()
       }
-    };
-    async Recharge(params) {
+    }
+    async UnbindIP() {
       try {
-        const res = await this.POST('/chargecard',params)
+        const openid = db.Get('openid')
+        const res = await this.POST('/unbindip',{"openid":openid})
         this.ShowToast('成功')
-        wepy.navigateBack({
-          delta: 1
-        })
       } catch (error) {
         console.log(error);
       }

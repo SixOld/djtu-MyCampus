@@ -1,7 +1,9 @@
 <!--suppress CssInvalidPropertyValue -->
 <style lang="less">
-  @import url("../less/config");
+  @import "./src/less/bind";
+  @base-color: #333;
   page {
+    width: 100%;
     height: 100%;
   }
   .help {
@@ -12,17 +14,21 @@
   .input-group {
     &:hover {
       transition: all 1s;
-      border: 2px solid @base-color;
+      border: 1px solid #fefefe;
+      .input-label {
+        color: #fefefe;
+        border-right: 1px solid #fefefe;
+      }
     }
+    border: 1px solid rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
     padding: 25rpx 10rpx;
     margin: 40rpx 3%;
-    background: #fff;
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 5px;
-    border: 2px solid #f4f4f4;
     .input-label {
-      color: #888;
+      color: #fefefe;
       font-size: 13pt;
       height: 25rpx;
       line-height: 25rpx;
@@ -30,6 +36,7 @@
       border-right: 1px solid #d8d8d8;
     }
     input {
+      color: #fefefe;
       flex: 1;
       font-size: 13pt;
       min-height: 52rpx;
@@ -43,66 +50,56 @@
     }
   }
   #bind {
+    width: 100%;
     height: 100%;
-    #title {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      height: 30%;
-      flex-wrap: wrap;
-      background: @base-color;
-      color: #fff;
-      font-size: 2rem;
-      text-align: center;
-      view {
-        margin-top: calc(~"15% - 1rem");
+    #content {
+      border-radius: 10rpx;
+      margin: 100rpx auto;
+      padding-top: 40rpx;
+      background: rgba(255, 255, 255, 0.15);
+      width: 95%;
+      height: 700rpx;
+      #title {
+        font-size: 40rpx;
+        text-align: center;
+        color: #fefefe;
       }
-      text {
+      button {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+        border-color: @base-color;
+        margin: 20rpx; // width: calc(~"100% - 40rpx");
+      }
+      form {
+        padding-top: 20rpx;
         display: block;
         width: 100%;
       }
-    }
-    button {
-      background: @base-color;
-      color: #fff;
-      border-color: @base-color;
-      margin: auto 20rpx;
-      position: absolute;
-      bottom: 2rem;
-      width: calc(~"100% - 40rpx");
-    }
-    form {
-      padding-top: 1rem;
-      display: block;
-      width: 100%;
-      height: calc(~"60% - 1rem");
-      background: #fefefe;
     }
   }
 </style>
 
 <template>
   <view id="bind">
-    <view id="title">
-      <view>
-        <text>我的交大</text>
-      </view>
+    <view id="stars"></view>
+    <view id="stars2"></view>
+    <view id="stars3"></view>
+    <view id="content">
+      <view id="title">绑定</view>
+      <form @submit="bind">
+        <view class="input-group" hover-class="active">
+          <text class="input-label">账号</text>
+          <input name="userAccount" type="number" placeholder="请输入您的校园网账号" />
+        </view>
+        <view class="input-group" hover-class="active">
+          <text class="input-label">密码</text>
+          <input name="password" type="password" placeholder="请输入您的密码" />
+        </view>
+        <view class="help">
+        </view>
+        <button formType="submit">绑定</button>
+      </form>
     </view>
-    <form @submit="bind">
-      <view class="input-group" hover-class="active">
-        <text class="input-label">学号</text>
-        <input name="userAccount" type="number" placeholder="请输入您的学号/工号" />
-      </view>
-      <view class="input-group" hover-class="active">
-        <text class="input-label">密码</text>
-        <input name="password" type="password" placeholder="请输入您的密码" />
-      </view>
-      <view class="help">
-        <view>密码为统一身份认证平台(即EDU邮箱)的密码，默认密码为身份证后六位</view>
-        <view>忘记密码可以访问 my.scu.edu.cn 找回</view>
-      </view>
-      <button formType="submit">绑定</button>
-    </form>
   </view>
 </template>
 
@@ -113,7 +110,10 @@
   import db from "util/db";
   export default class BindJwc extends wepy.page {
     config = {
-      navigationBarTitleText: ''
+      navigationBarTitleText: '绑定',
+      navigationBarBackgroundColor: '#090a0f',
+      navigationBarTextStyle: 'white',
+
     }
     mixins = [HttpMixin, ToastMixin]
     components = {}
@@ -122,6 +122,10 @@
         let params = e.detail.value
         if (params.userAccount == 0 || params.password == '') {
           this.ShowToast('学号密码必填！')
+          return
+        }
+        if ( params.userAccount.indexOf(">") >= 0|| params.userAccount.indexOf("<") >= 0) {
+          this.ShowToast('小伙子你不乖哦，有想法的话联系我们一起干怎么样')
           return
         }
         this.Bind(params)
@@ -135,10 +139,11 @@
         if(res.status === 1){
         	db.Set('token', res.token)
         	db.Set('verify', res.verify)
+        	db.Set('user',res.user)
         }
         this.ShowToast('绑定成功！', 'success')
-        wepy.navigateTo({
-          url: 'index'
+        wepy.navigateBack({
+          delta: 1
         })
       } catch (error) {
         console.log(error);
