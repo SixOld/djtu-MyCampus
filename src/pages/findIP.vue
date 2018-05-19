@@ -1,7 +1,7 @@
 <style lang="less">
   @import "./src/less/config";
   page {
-  	background-image: url("https://scuplus.oss-cn-shenzhen.aliyuncs.com/bg/bus.png");
+  	background-image: url("https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/findip.png");
     background-position: 50% calc(~"100% + 380rpx");
     background-repeat: no-repeat;
     background-size: 100%;

@@ -108,7 +108,7 @@
   import db from "util/db";
   export default class Recharge extends wepy.page {
     config = {
-      navigationBarTitleText: ''
+      navigationBarTitleText: '校园网充值'
     };
     mixins = [HttpMixin, ToastMixin]
     components = {}
