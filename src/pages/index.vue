@@ -130,7 +130,7 @@
     mixins = [HttpMixin]
     data = {
       notices: [{
-        cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index.jpg',
         id: 1
       }],
       funcs: index.funcs,

@@ -271,7 +271,6 @@
       },
       room(e) {
         this.room = e.detail.value
-        db.Set("room",this.room.roomid)
         if (this.room.roomid == 0) {
           this.ShowToast('寝室号必填！')
           return
@@ -285,18 +284,17 @@
     }
     watch = {
       choose(n, o) {
-        this.chooseStr = this.range[0][n[0]].value + this.range[1][n[1]].value + this.room
+        this.chooseStr = this.range[0][n[0]].value + this.range[1][n[1]].value
       }
     }
     onLoad() {
       this.choose = db.Get("roomChoose") || [0, 0]
       this.changeColumn(this.choose[0])
-      this.room = db.Get("room")
       this.height = wx.getSystemInfoSync().windowHeight - 80
     }
     async Room(params) {
       try {
-      	const res = await this.POST('/selectip',{"room":this.chooseStr})
+      	const res = await this.POST('/selectip',{"room":this.chooseStr + params.roomid})
       	this.res = res
       	if(res.status === 1){
        		this.data.hidden[0].value = "show"
