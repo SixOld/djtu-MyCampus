@@ -1,7 +1,13 @@
 <style lang="less">
   @import "./src/less/config.less";
   page {
-    background: @bg-color;
+    background-image: url("https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/background1.png");
+    background-position: 50% calc(~"100% + 380rpx");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    color: #3e3c3d;
+    padding-top: 90rpx;
   }
   .func {
     background: #fff;
@@ -132,6 +138,18 @@
       notices: [{
         cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index.jpg',
         id: 1
+      },{
+        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index.jpg',
+        id: 2
+      },{
+        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index.jpg',
+        id: 3
+      },{
+        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index.jpg',
+        id: 4
+      },{
+        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index.jpg',
+        id: 5
       }],
       funcs: index.funcs,
       swiper_height: 200,

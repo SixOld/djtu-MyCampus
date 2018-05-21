@@ -11,6 +11,9 @@
   .hidden{
   	display: none;
   }
+  .show{
+  	text-align: center;
+  }
   .table {
     padding: 0.5rem;
     .row {
@@ -61,6 +64,9 @@
   <view>
     <!-- 上网数据 -->
     <view class="ulli">
+    	<view class="{{hidden[1].value}}">
+    		下拉有惊喜
+    	</view>
       <view class="{{hidden[0].value}}">
 	      <view class="row">
 	        <view>开始时间</view>
@@ -117,6 +123,8 @@
       trans: [],
       hidden:[{
       	value:"hidden"
+      },{
+      	value:"show"
       }],
     }
     computed = {
@@ -150,6 +158,7 @@
         this.trans = trans
         if(trans.status === 1){
  	       	this.data.hidden[0].value = "table"
+ 	       	this.data.hidden[1].value = "hidden"
         }
         this.$apply()
         this.InitSet("trans", trans)
