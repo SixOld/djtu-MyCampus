@@ -29,8 +29,8 @@
         backgroundColor: '#dddddd'
       },
       tabBar: {
-        selectedColor: '#f06292',
-        color: '#707070',
+        selectedColor: '#2c2c2c',
+        color: '#e6e6e6',
         list: [{
             pagePath: 'pages/index',
             text: '首页',

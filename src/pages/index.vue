@@ -65,7 +65,7 @@
   .swiper {
     width: 100%;
     z-index: 99;
-    top: 0;
+    margin-top: -40px;    
     swiper-item {
       width: 100%;
     }
