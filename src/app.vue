@@ -23,7 +23,7 @@
         'pages/my/my',
       ],
       window: {
-        navigationBarBackgroundColor: '#ffffff',
+        navigationBarBackgroundColor: '#efefef',
         navigationBarTextStyle: 'black',
         navigationBarTitleText: '我的交大',
         backgroundColor: '#dddddd'

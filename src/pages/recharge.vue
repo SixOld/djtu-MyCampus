@@ -63,14 +63,11 @@
       }
     }
     button {
-      background: @base-color;
-      color: #fff;
-      border-color: @base-color;
-      margin: auto 20rpx;
-      position: absolute;
-      bottom: 2rem;
-      width: calc(~"100% - 40rpx");
-    }
+	    background: rgba(255, 255, 255, 0.15);
+	    color: #000000;
+	    border-color: @base-color;
+	    margin: 20rpx; // width: calc(~"100% - 40rpx");
+	  }
     form {
       padding-top: 1rem;
       display: block;

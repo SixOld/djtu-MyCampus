@@ -1,8 +1,8 @@
 <style lang="less">
   @import "./src/less/config.less";
   page {
-    background-image: url("https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/background1.png");
-    background-position: 50% calc(~"100% rpx");
+    background-image: url("https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/background2.png");
+    background-position: 50% calc(~"100% + 0rpx");
     background-repeat: no-repeat;
     background-size: 100%;
     background-attachment: fixed;
@@ -136,19 +136,19 @@
     mixins = [HttpMixin]
     data = {
       notices: [{
-        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index.jpg',
+        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index1.jpg',
         id: 1
       },{
-        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index.jpg',
+        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index2.jpg',
         id: 2
       },{
-        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index.jpg',
+        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index3.jpg',
         id: 3
       },{
-        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index.jpg',
+        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index4.jpg',
         id: 4
       },{
-        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index.jpg',
+        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index5.jpg',
         id: 5
       }],
       funcs: index.funcs,
