@@ -1,0 +1,138 @@
+<style lang="less">
+  @import "./src/less/config";
+  @border: 1px solid #ddd;
+  page {
+    background: @bg-color;
+  }
+  form {
+    color: #333;
+    .info {
+      padding: 0.5rem;
+      display: block;
+      font-size: 0.8rem;
+      color: #999;
+    }
+    .help {
+      padding: 0.5rem;
+      font-size: 0.8rem;
+      color: #999;
+    }
+    .picker {
+      display: flex;
+      justify-content: space-between;
+      border-top: @border; // font-size: 0.8rem;
+      padding: 0.5rem;
+      background: #fff;
+    }
+    input {
+      border-top: @border;
+      padding: 0.5rem;
+      background: #fff;
+    }
+    textarea {
+      background: #fff;
+      border-top: @border;
+      padding: 0.5rem;
+      border-bottom: @border;
+      width: 95%;
+      height: 8rem;
+    }
+    button.submit {
+      position: fixed;
+      bottom: 0;
+      border-radius: 0;
+      width: 100%;
+      height: 100rpx;
+      font-size: 28rpx;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      color: #000000;
+      font-size: 38rpx;
+    }
+  }
+</style>
+
+<template>
+  <view>
+    <form @submit="feedback">
+      <text class="info">新建反馈</text>
+      <input name="title" placeholder="请输入标题" />
+      <picker name="label" @change="pickerHandle" value="{{feedbackIndex}}" range="{{feedbackType}}">
+        <view class="picker">
+          <text>请选择类型:</text>
+          <text>{{feedbackType[feedbackIndex]}}</text>
+        </view>
+      </picker>
+      <textarea name="body" placeholder="请输入内容" />
+      <view class="help">
+        <text>感谢您的反馈，您的反馈将以issue的形式提交到djtu-MyCampus-Six的github，您可以通过访问https://github.com/SixOld/djtu-MyCampus-Six/issues来获取您的反馈动态，同时也可以关注项目的开发进度，当然如果您有更好的实现欢迎联系我们</text>
+      </view>
+      <button @getuserinfo="getUserInfo" open-type="getUserInfo" class="submit" formType="submit">提交反馈</button>
+    </form>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import {
+    version
+  } from 'config'
+  import HttpMixin from "mixins/http";
+  import ToastMixin from "mixins/toast";
+  import db from "util/db"
+  export default class Feedback extends wepy.page {
+    mixins = [HttpMixin, ToastMixin]
+    components = {}
+    config = {
+      navigationBarTitleText: '反馈'
+    }
+    data = {
+      feedbackType: ['Bug', '功能建议', '其他'],
+      feedbackIndex: 0
+    }
+    methods = {
+      pickerHandle(e) {
+        this.feedbackIndex = e.detail.value
+      },
+      async feedback(e) {
+        let param = e.detail.value
+        if (!param.title || !param.body) {
+          this.ShowToast('标题或内容不能为空')
+          return
+        }
+        try {
+          //let info = wepy.getSystemInfoSync()
+          param.title = param.title
+          param.body = param.content
+          param.labels = this.feedbackType[param.label]
+        } catch (error) {
+          this.ShowToast('获取系统信息错误, 请稍候再试')
+          return
+        }
+        const resp = await this.POST('/user/feedback', param)
+        wepy.showModal({
+          title: '成功',
+          success: function(res) {
+            if (res.confirm) {
+              wepy.navigateBack({
+                delta: 1
+              })
+            }
+          }
+        })
+      }
+    }
+    onLoad(option) {
+      if ('index' in option) this.feedbackIndex = option.index
+    }
+    onShareAppMessage(options) {
+      return {
+        title: '我的交大-反馈'
+      }
+    }
+  }
+</script>
+
+

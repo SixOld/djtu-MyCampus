@@ -74,6 +74,9 @@
           name: "账号绑定",
           url: "/pages/bind"
         },{
+          name: "问题反馈",
+          url: "/pages/my/feedback"
+        },{
           name: "账号解绑",
           url: "/pages/unbindwx"
         }
