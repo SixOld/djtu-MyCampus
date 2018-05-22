@@ -10,7 +10,7 @@
     text-align: center;
     .iconfont {
       font-size: 2rem;
-      color: #f06292;
+      color: #000000;
     }
   }
 </style>

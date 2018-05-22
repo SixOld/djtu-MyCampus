@@ -1,23 +1,23 @@
 const funcs = [
   {
-    name: '充值',
+    name: '网络充值',
     url: 'recharge',
     icon: '',
-    bg: '#99ccee',
+    bg: '#efefef',
     type: 'login'
   },
   {
-    name: '查询',
+    name: '查询/解绑',
     url: 'demand',
     icon: 'ecard',
-    bg: '#99ccee',
+    bg: '#efefef',
     type: 'login'
   },
   {
-    name: '查ip',
+    name: '查询ip',
     url: 'findIP',
     icon: '',
-    bg: '#99ccee',
+    bg: '#efefef',
     type: 'login'
   },
 /*{

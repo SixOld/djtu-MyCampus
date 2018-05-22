@@ -1,5 +1,5 @@
 <style lang="less">
-  @base-color: #f06292;
+  @base-color: #000000;
   scroll-view {
     height: 100%;
     background: #eee;
