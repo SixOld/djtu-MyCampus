@@ -21,7 +21,7 @@
         'pages/recharge',
         'pages/demand',
         'pages/my/my',
-        'pages/my/feedback',
+        'pages/my/feedback'
       ],
       window: {
         navigationBarBackgroundColor: '#efefef',

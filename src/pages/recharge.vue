@@ -2,6 +2,11 @@
 <style lang="less">
   @import url("../less/config");
   page {
+   	background-image: url("https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/recharge.png");
+    background-position: 50% calc(~"100% + 300rpx");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
     height: 100%;
   }
   .help {
@@ -105,7 +110,8 @@
   import db from "util/db";
   export default class Recharge extends wepy.page {
     config = {
-      navigationBarTitleText: '校园网充值'
+      navigationBarTitleText: '校园网充值',
+      navigationBarBackgroundColor: '#8cbbc4'
     };
     mixins = [HttpMixin, ToastMixin]
     components = {}

@@ -2,7 +2,7 @@
   @import "./src/less/config.less";
   page {
     background-image: url("https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/background2.png");
-    background-position: 50% calc(~"100% + 0rpx");
+    background-position: 50% calc(~"100% + 180rpx");
     background-repeat: no-repeat;
     background-size: 100%;
     background-attachment: fixed;
@@ -110,6 +110,15 @@
     </view>
     <!-- 卡片区, 置放通知卡片, 例如: 成绩通知, 课程通知, 自习教室, 考试通知 -->
     <view wx:if="{{verify > 0}}">
+    	<schedule-card iconBg="#eacdd1" icon="kechengbiao" title="公告" bg="card-schedule.png" :isShow.sync="notice" url="" footText="最新公告" noneText="暂无公告">
+        <block slot="content" wx:for="{{notice}}" wx:if="{{item.course_name}}" wx:key="{{index}}">
+          <view class="card-list">
+            <view class="card-left">
+              <text class="class-name">{{item.course_name}}</text>
+            </view>
+          </view>
+        </block>
+      </schedule-card>
     </view>
     <empty wx:else msg="尚未绑定账号"></empty>
   </view>
@@ -138,18 +147,6 @@
       notices: [{
         cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index1.jpg',
         id: 1
-      },{
-        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index2.jpg',
-        id: 2
-      },{
-        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index3.jpg',
-        id: 3
-      },{
-        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index4.jpg',
-        id: 4
-      },{
-        cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index5.jpg',
-        id: 5
       }],
       funcs: index.funcs,
       swiper_height: 200,
@@ -158,38 +155,9 @@
       verify() {
         return db.Get('verify')
       },
-      ecardBalance() {
-        const trans = db.Get("trans")
-        if (trans.length > 0) {
-          return [trans[0].balance]
-        } else {
-          return []
-        }
-      },
-      exams() {
-        let arr = db.Get("exams")
-        let data = []
-        for (let i = 0; i < arr.length; i++) {
-          if (arr[i].t >= 0) data.push(e)
-        }
-        return data
-      },
-      loanBooks() {
-        return db.Get("loan_now")
-      },
-      todaySchedules() {
-        let schedules = db.Get('schedules')
-        if (!schedules) {
-          return
-        }
-        const todaySchedule = []
-        let today = new Date().getDay() || 7
-        schedules[today].forEach(e => {
-          if (e.course_name) {
-            todaySchedule.push(e)
-          }
-        })
-        return todaySchedule
+      notice() {
+        const notice = [{course_name:"很抱歉该小程序只能连数据流量，连接djtu无法使用，如果造成不便敬请谅解"}]
+        return notice
       }
     }
     navigate(item) {

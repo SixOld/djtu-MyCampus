@@ -14,7 +14,7 @@ const funcs = [
     type: 'login'
   },
   {
-    name: '查询ip',
+    name: '查ip',
     url: 'findIP',
     icon: '',
     bg: '#efefef',

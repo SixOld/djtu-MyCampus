@@ -1,28 +1,34 @@
-<!--suppress CssInvalidPropertyValue -->
 <style lang="less">
-  @import url("../less/config");
+  @import "./src/less/bind";
+  @base-color: #333;
   page {
+    width: 100%;
     height: 100%;
   }
   .help {
     font-size: 0.7rem;
     color: #888;
     padding: 0 3%;
+    text-align: center ;
   }
   .input-group {
     &:hover {
       transition: all 1s;
-      border: 2px solid @base-color;
+      border: 1px solid #fefefe;
+      .input-label {
+        color: #fefefe;
+        border-right: 1px solid #fefefe;
+      }
     }
+    border: 1px solid rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
     padding: 25rpx 10rpx;
     margin: 40rpx 3%;
-    background: #fff;
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 5px;
-    border: 2px solid #f4f4f4;
     .input-label {
-      color: #888;
+      color: #fefefe;
       font-size: 13pt;
       height: 25rpx;
       line-height: 25rpx;
@@ -30,6 +36,7 @@
       border-right: 1px solid #d8d8d8;
     }
     input {
+      color: #fefefe;
       flex: 1;
       font-size: 13pt;
       min-height: 52rpx;
@@ -43,44 +50,45 @@
     }
   }
   #unbind {
+    width: 100%;
     height: 100%;
-    #title {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      height: 30%;
-      flex-wrap: wrap;
-      background: @base-color;
-      color: #fff;
-      font-size: 2rem;
-      text-align: center;
-      view {
-        margin-top: calc(~"15% - 1rem");
+    #content {
+      border-radius: 10rpx;
+      margin: 100rpx auto;
+      padding-top: 40rpx;
+      background: rgba(255, 255, 255, 0.15);
+      width: 95%;
+      height: 700rpx;
+      #title {
+        font-size: 40rpx;
+        text-align: center;
+        color: #fefefe;
       }
-      text {
+      form {
+        padding-top: 20rpx;
         display: block;
         width: 100%;
       }
     }
-    button {
-	    background: rgba(255, 255, 255, 0.15);
-	    color: #000000;
-	    border-color: @base-color;
-	    margin: 20rpx; // width: calc(~"100% - 40rpx");
-	  }
-    form {
-      padding-top: 1rem;
-      display: block;
-      width: 100%;
-      height: calc(~"60% - 1rem");
-      background: #fefefe;
-    }
   }
+  button {
+	  background: rgba(255, 255, 255, 0.15);
+		color: #fff;
+		border-color: @base-color;
+	  margin: auto 20rpx;
+	  position: absolute;
+	  bottom: 2rem;
+	  width: calc(~"100% - 40rpx");
+	}
 </style>
 
 <template>
   <view id="unbind">
+  	<view id="stars"></view>
+    <view id="stars2"></view>
+    <view id="stars3"></view>
     <form @submit="unbindwx">
+    	<view class="help">真的要离开我们么QAQ？？</view>
       <button formType="submit">解绑微信</button>
     </form>
   </view>
@@ -93,25 +101,27 @@
   import db from "util/db"
   export default class Unbindwx extends wepy.page {
     config = {
-      navigationBarTitleText: '解绑微信'
+      navigationBarTitleText: '解绑微信',
+      navigationBarBackgroundColor: '#090a0f',
+      navigationBarTextStyle: 'white'
+
     }
     mixins = [HttpMixin, ToastMixin]
     components = {}
     methods = {
-      unbindwx() {
-        this.Unbindwx()
+      unbindwx(){
+		  	this.Unbindwx()
       }
     }
     async Unbindwx() {
       try {
       	const openid = db.Get('openid')
         const res = await this.POST('/unbindwx',{"openid":openid})
-        this.ShowToast('成功')
         db.Set('token',res.token)
         db.Set('verify',res.verify)
         wepy.navigateBack({
-          delta: 1
-        })
+	        delta: 1
+	      })
       } catch (error) {
         console.log(error);
       }      

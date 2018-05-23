@@ -102,26 +102,32 @@
           this.ShowToast('标题或内容不能为空')
           return
         }
+        if ( param.title.indexOf(">") >= 0|| param.title.indexOf("<") >= 0|| param.body.indexOf("<") >= 0|| param.body.indexOf(">") >= 0) {
+          this.ShowToast('小伙子你不乖哦，有想法的话联系我们一起干怎么样')
+          return
+        }
         try {
           //let info = wepy.getSystemInfoSync()
           param.title = param.title
-          param.body = param.content
+          param.body = param.body
           param.labels = this.feedbackType[param.label]
         } catch (error) {
           this.ShowToast('获取系统信息错误, 请稍候再试')
           return
         }
         const resp = await this.POST('/user/feedback', param)
-        wepy.showModal({
-          title: '成功',
-          success: function(res) {
-            if (res.confirm) {
-              wepy.navigateBack({
-                delta: 1
-              })
-            }
-          }
-        })
+        if (resp.status === 1){
+	        wepy.showModal({
+	          title: '成功',
+	          success: function(res) {
+	            if (res.confirm) {
+	              wepy.navigateBack({
+	                delta: 1
+	              })
+	            }
+	          }
+	        })
+	      }
       }
     }
     onLoad(option) {

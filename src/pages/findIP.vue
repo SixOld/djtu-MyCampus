@@ -298,6 +298,7 @@
       	this.res = res
       	if(res.status === 1){
        		this.data.hidden[0].value = "show"
+       		this.ShowToast('成功,如果没有显示请再点一次')
        	}
       } catch (error) {
         console.log(error);
