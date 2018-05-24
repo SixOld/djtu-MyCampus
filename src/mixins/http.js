@@ -87,6 +87,10 @@ export default class HttpMixin extends wepy.mixin {
           if (showToast) {this.ShowToast("非法访问")}
           reject(res)
         }
+        else if(res.data.errorCode === "30001"){
+          if (showToast) {this.ShowToast("用户不存在，请重新输入")}
+          reject(res)
+        }
         else if(res.data.errorCode === "30014"){
           if (showToast) {this.ShowToast("充值卡不存在")}
           reject(res)
