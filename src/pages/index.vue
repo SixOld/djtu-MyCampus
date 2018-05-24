@@ -1,93 +1,79 @@
 <style lang="less">
-	@import "./src/less/config.less";
-	page {
-		background-image: url("https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/background2.png");
-		background-position: 50% calc(~"100% + 180rpx");
-		background-repeat: no-repeat;
-		background-size: 100%;
-		background-attachment: fixed;
-		color: #3e3c3d;
-		padding-top: 90rpx;
-	}
-	
-	.func {
-		background: #fff;
-		margin: 20rpx;
-		margin-top: -40rpx;
-		position: relative;
-		border-radius: 10rpx;
-		box-shadow: 0rpx 4rpx 10rpx #ddd;
-		z-index: 999;
-		.func-row {
-			display: flex;
-			justify-content: space-around;
-			flex-wrap: wrap;
-			.login {
-				&.no-verify {
-					.iconfont {
-						background: #ccc !important;
-					}
-				}
-			}
-		}
-	}
-	
-	.mview {
-		padding-top: 0.7rem;
-		width: 20%;
-		border-bottom: 1px solid #eee;
-	}
-	
-	.icon-btn {
-		text-align: center;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		align-content: space-between;
-		flex-wrap: wrap; // width: 25%;
-		.iconfont {
-			box-shadow: 2rpx 2rpx 0rpx #eee;
-			@size: 2.7rem;
-			width: @size;
-			border-radius: @size*0.5;
-			height: @size;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			background: #99ccee;
-			color: #fff;
-			font-size: 1.2rem;
-		}
-		text {
-			width: 100%;
-			display: block;
-			margin-top: 5rpx;
-			font-size: 0.8rem;
-		}
-	}
-	
-	.swiper {
-		width: 100%;
-		z-index: 99;
-		margin-top: -40px;
-		swiper-item {
-			width: 100%;
-		}
-		image {
-			z-index: 30;
-			width: 100%;
-		}
-	}
-	
-	.ecard {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		color: @base-color;
-		font-size: 70rpx;
-		height: 150rpx;
-		border-bottom: 2rpx dashed #fff;
-	}
+  @import "./src/less/config.less";
+  page {
+    background-image: url("https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/background2.png");
+	background-position: 50% calc(~"100% + 180rpx");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-attachment: fixed;
+	color: #3e3c3d;
+	padding-top: 90rpx;
+  }
+  .func {
+    background: #fff;
+    margin: 20rpx;
+    margin-top: -40rpx;
+    position: relative;
+    border-radius: 10rpx;
+    box-shadow: 0rpx 4rpx 10rpx #ddd;
+    z-index: 999;
+    .func-row {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      .login {
+        &.no-verify {
+          .iconfont {
+            background: #ccc !important;
+          }
+        }
+      }
+    }
+  }
+  .mview {
+    padding-top: 30rpx;
+    width: 20%; // border-bottom: 1px solid #eee;
+  }
+  .icon-btn {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: space-between;
+    flex-wrap: wrap;
+    .icon {
+      @size: 80rpx;
+      width: @size;
+      height: @size;
+    }
+    text {
+      width: 100%;
+      display: block;
+      margin-top: 2rpx;
+      font-size: 28rpx;
+    }
+  }
+  .swiper {
+    width: 100%;
+    z-index: 99;
+    margin-top: -40px;
+    swiper-item {
+      width: 100%;
+    }
+    image {
+      z-index: 30;
+      width: 100%;
+    }
+  }
+  .ecard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: @base-color;
+    font-size: 70rpx;
+    height: 150rpx;
+    border-bottom: 2rpx dashed #fff;
+  }
 </style>
 
 <template>
