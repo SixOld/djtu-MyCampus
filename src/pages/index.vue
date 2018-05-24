@@ -108,19 +108,17 @@
         </repeat>
       </view>
     </view>
-    <!-- 卡片区, 置放通知卡片, 例如: 成绩通知, 课程通知, 自习教室, 考试通知 -->
-    <view wx:if="{{verify > 0}}">
-    	<schedule-card iconBg="#eacdd1" icon="kechengbiao" title="公告" bg="card-schedule.png" :isShow.sync="notice" url="" footText="最新公告" noneText="暂无公告">
-        <block slot="content" wx:for="{{notice}}" wx:if="{{item.course_name}}" wx:key="{{index}}">
-          <view class="card-list">
-            <view class="card-left">
-              <text class="class-name">{{item.course_name}}</text>
-            </view>
-          </view>
-        </block>
-      </schedule-card>
-    </view>
-    <empty wx:else msg="尚未绑定账号"></empty>
+    <!-- 卡片区, 置放通知卡片 -->
+    <notice iconBg="#eacdd1" icon="kechengbiao" title="公告" bg="card-schedule.png" :isShow.sync="notice" url="" footText="最新公告" noneText="暂无公告">
+	    <block slot="content" wx:for="{{notice}}" wx:if="{{item.course_name}}" wx:key="{{index}}">
+	      <view class="card-list">
+	        <view class="card-left">
+	          <text class="class-name">{{item.course_name}}</text>
+	        </view>
+	      </view>
+	    </block>
+	  </notice>
+    <empty wx:if="{{verify == 0}}" msg="尚未绑定账号"></empty>
   </view>
 </template>
 
@@ -136,10 +134,7 @@
     config = {};
     components = {
       "mview": MView,
-      "schedule-card": Card,
-      "book-card": Card,
-      "ecard": Card,
-      "exam-card": Card,
+      "notice": Card,
       "empty": Empty
     }
     mixins = [HttpMixin]
