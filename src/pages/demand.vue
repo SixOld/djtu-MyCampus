@@ -95,12 +95,6 @@
 	        <view>姓名</view>
 	        <view>{{trans.userName}}</view>
 	      </view>
-	      <view id="unbind">
-			    <form @submit="unbindip">
-			    	<view class="row">{{user[0].value}}</view>
-			      <button formType="submit">解绑IP</button>
-			    </form>
-			  </view>
 	    </view>
     </view>
   </view>
@@ -133,18 +127,6 @@
     computed = {
     }
     methods = {
-      unbindip() {
-        this.UnbindIP()
-      }
-    }
-    async UnbindIP() {
-      try {
-        const openid = db.Get('openid')
-        const res = await this.POST('/unbindip',{"openid":openid})
-        this.ShowToast('成功')
-      } catch (error) {
-        console.log(error);
-      }
     }
     async onPullDownRefresh() {
       try {

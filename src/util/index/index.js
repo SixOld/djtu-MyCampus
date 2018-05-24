@@ -7,14 +7,21 @@ const funcs = [
     type: 'login'
   },
   {
-    name: '查询/解绑',
+    name: '我的信息',
     url: 'demand',
     icon: 'ecard',
     bg: '#efefef',
     type: 'login'
   },
   {
-    name: '查ip',
+    name: '网络解绑',
+    url: 'index',
+    icon: '',
+    bg: '#efefef',
+    type: 'unbind'
+  },
+  {
+    name: '查询IP',
     url: 'findIP',
     icon: '',
     bg: '#efefef',
