@@ -111,7 +111,7 @@
   export default class Recharge extends wepy.page {
     config = {
       navigationBarTitleText: '校园网充值',
-      navigationBarBackgroundColor: '#8cbbc4'
+      navigationBarBackgroundColor: '#003ec6'
     };
     mixins = [HttpMixin, ToastMixin]
     components = {}

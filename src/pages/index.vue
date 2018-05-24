@@ -106,7 +106,7 @@
 				<repeat for="{{funcs}}" item="item" key="index">
 					<mview @mtap.user="to" class="mview {{item.type}} {{verify === 1 ? '' : 'no-verify'}}" :arg.sync="item">
 						<view class="icon-btn" slot="content">
-							<view style="background: {{item.bg}};" class="iconfont icon-{{item.icon}}"></view>
+							<image class="icon" src="/icon/{{item.icon}}.png"></image>
 							<text>{{item.name}}</text>
 						</view>
 					</mview>

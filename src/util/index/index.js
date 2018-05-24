@@ -2,28 +2,28 @@ const funcs = [
   {
     name: '网络充值',
     url: 'recharge',
-    icon: '',
+    icon: '1',
     bg: '#efefef',
     type: 'login'
   },
   {
     name: '我的信息',
     url: 'demand',
-    icon: 'ecard',
+    icon: '2',
     bg: '#efefef',
     type: 'login'
   },
   {
     name: '网络解绑',
     url: 'index',
-    icon: '',
+    icon: '3',
     bg: '#efefef',
     type: 'unbind'
   },
   {
     name: '查询IP',
     url: 'findIP',
-    icon: '',
+    icon: '4',
     bg: '#efefef',
     type: 'login'
   },

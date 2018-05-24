@@ -2,7 +2,7 @@
   @import "./src/less/config";
   page {
   	background-image: url("https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/findip.png");
-    background-position: 50% calc(~"100% + 380rpx");
+    background-position: 50% calc(~"100% + 150rpx");
     background-repeat: no-repeat;
     background-size: 100%;
     background-attachment: fixed;
@@ -18,7 +18,7 @@
     align-items: center;
     position: fixed;
     z-index: 100;
-    background: #ab96c5;
+    background: #f6ac00;
     color: @white;
   }
   .timeline {
@@ -190,7 +190,7 @@
   import HttpMixin from "mixins/http";
   export default class Find extends wepy.page {
     config = {
-      navigationBarBackgroundColor: '#ab96c5',
+      navigationBarBackgroundColor: '#f6ac00',
       navigationBarTitleText: '查ip'
     }
     mixins = [DataMixin,HttpMixin,ToastMixin]

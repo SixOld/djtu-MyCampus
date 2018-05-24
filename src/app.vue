@@ -16,7 +16,6 @@
         'pages/index',
         'pages/bind',
         'pages/unbindwx',
-        'pages/unbindip',
         'pages/findIP',
         'pages/recharge',
         'pages/demand',
