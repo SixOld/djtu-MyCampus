@@ -132,6 +132,9 @@
       }
     }
   }
+  .dot{
+  	margin-left: 70%;
+  }
 </style>
 
 <template>
@@ -154,6 +157,7 @@
         <view>开始ip</view>
         <view>{{res.start_ip}}</view>
       </view>
+      <view class="dot">......</view>
       <view class="row">
         <view>结束ip</view>
         <view>{{res.end_ip}}</view>
