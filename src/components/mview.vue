@@ -63,9 +63,6 @@
           console.log("现在处于微信开发者工具！");
           return
         }
-        this.PostWithBind("/user/msg_id", {
-          "ids": e.detail.formId
-        }, false)
       }
     }
   }
