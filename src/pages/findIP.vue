@@ -159,23 +159,23 @@
         <view>{{res.end_ip}}</view>
       </view>
       <view class="row">
-        <view>Subnet</view>
+        <view>子关掩码</view>
         <view>{{res.Subnet}}</view>
       </view>
       <view class="row">
-        <view>gateway</view>
+        <view>默认网关</view>
         <view>{{res.gateway}}</view>
       </view>
       <view class="row">
-        <view>dns1</view>
+        <view>首选DNS</view>
         <view>{{res.SDNS}}</view>
       </view>
       <view class="row">
-        <view>dns2</view>
+        <view>备用DNS</view>
         <view>{{res.FDNS}}</view>
       </view>
       <view class="row">
-        <view>tongji</view>
+        <view>历史查询次数</view>
         <view>{{res.tongji}}</view>
       </view>
     </view>
@@ -294,12 +294,10 @@
     }
     async Room(params) {
       try {
-      	const res = await this.POST('/selectip',{"room":this.chooseStr + params.roomid})
-      	this.res = res
-      	if(res.status === 1){
-       		this.data.hidden[0].value = "show"
-       		this.ShowToast('成功,如果没有显示请再点一次')
-       	}
+      	this.res = await this.POST('/selectip',{"room":this.chooseStr + params.roomid})
+      	this.data.hidden[0].value = "show"
+       	this.ShowToast('成功')
+       	this.$apply()
       } catch (error) {
         console.log(error);
       }

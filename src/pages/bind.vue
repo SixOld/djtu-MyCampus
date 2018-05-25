@@ -136,11 +136,11 @@
       	params.openid = db.Get("openid")
       	params= JSON.stringify(params)
         const res = await this.POST('/bindwx',params)
-        if(res.status === 1){
-        	db.Set('token', res.token)
-        	db.Set('verify', res.verify)
-        	db.Set('user',res.user)
-        }
+        let Base64 = require("js-base64").Base64
+      	const token = Base64.encode(res.token+":3456834518")
+	    	db.Set('token', token)
+	    	db.Set('verify', res.verify)
+	    	db.Set('user',res.user)
         this.ShowToast('绑定成功！', 'success')
         wepy.navigateBack({
           delta: 1
