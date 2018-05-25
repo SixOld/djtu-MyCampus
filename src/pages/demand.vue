@@ -73,11 +73,11 @@
       <view class="{{hidden[0].value}}">
 	      <view class="row">
 	        <view>周期开始时间</view>
-	        <view>{{trans.LimitTime}}</view>
+	        <view>{{trans.StartTime}}</view>
 	      </view>
 	      <view class="row">
 	        <view>周期结束时间</view>
-	        <view>{{trans.StartTime}}</view>
+	        <view>{{trans.LimitTime}}</view>
 	      </view>
 	      <view class="row">
 	        <view>账号</view>
