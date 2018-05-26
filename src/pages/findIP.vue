@@ -300,7 +300,11 @@
       try {
       	this.res = await this.POST('/selectip',{"room":this.chooseStr + params.roomid})
       	this.data.hidden[0].value = "show"
-       	this.ShowToast('成功')
+       	wepy.showToast({
+		      title: "成功",
+		      icon: 'success',
+		      duration: 2000
+		    })
        	this.$apply()
       } catch (error) {
         console.log(error);

@@ -178,7 +178,11 @@
 				const res = await this.POST('/unbindip', {
 					"openid": openid
 				})
-				this.ShowToast('成功')
+				wepy.showToast({
+		      title: "成功",
+		      icon: 'success',
+		      duration: 2000
+		    })
 			} catch(error) {
 				console.log(error);
 			}

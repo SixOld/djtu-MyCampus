@@ -141,7 +141,11 @@
 	    	db.Set('token', token)
 	    	db.Set('verify', res.verify)
 	    	db.Set('user',res.user)
-        this.ShowToast('绑定成功！', 'success')
+        wepy.showToast({
+		      title: "成功",
+		      icon: 'success',
+		      duration: 2000
+		    })
         wepy.navigateBack({
           delta: 1
         })
