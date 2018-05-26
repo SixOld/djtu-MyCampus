@@ -76,7 +76,13 @@ export default class HttpMixin extends wepy.mixin {
           reject(res)
         }
         else if(res.data.errorCode === 107){
-          if (showToast) {this.ShowToast("账号没有IP可以解绑")}
+          if (showToast) {
+          	wepy.showModal({
+							title: '账号没有IP可以解绑',
+							content: '没事不要点着玩',
+							success: function(res) {}
+						})
+          }
           reject(res)
         }
         else if(res.data.errorCode === 108){
