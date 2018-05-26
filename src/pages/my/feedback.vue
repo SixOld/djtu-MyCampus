@@ -103,7 +103,7 @@
           return
         }
         if ( param.title.indexOf(">") >= 0|| param.title.indexOf("<") >= 0|| param.body.indexOf("<") >= 0|| param.body.indexOf(">") >= 0) {
-          this.ShowToast('小伙子你不乖哦，有想法的话联系我们一起干怎么样')
+          this.ShowToast('小伙子你不乖哦')
           return
         }
         try {

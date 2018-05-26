@@ -125,7 +125,7 @@
           return
         }
         if ( params.userAccount.indexOf(">") >= 0|| params.userAccount.indexOf("<") >= 0) {
-          this.ShowToast('小伙子你不乖哦，有想法的话联系我们一起干怎么样')
+          this.ShowToast('小伙子你不乖哦')
           return
         }
         this.Bind(params)

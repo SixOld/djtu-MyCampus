@@ -280,7 +280,7 @@
           return
         }
         if ( this.room.roomid.indexOf(">") >= 0|| this.room.roomid.indexOf("<") >= 0) {
-          this.ShowToast('小伙子你不乖哦，有想法的话联系我们一起干怎么样')
+          this.ShowToast('小伙子你不乖哦')
           return
         }
        	this.Room(this.room)
