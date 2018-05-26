@@ -67,9 +67,6 @@
   <view>
     <!-- 上网数据 -->
     <view class="ulli">
-    	<view class="{{hidden[1].value}}">
-    		下拉有惊喜
-    	</view>
       <view class="{{hidden[0].value}}">
 	      <view class="row">
 	        <view>周期开始时间</view>
@@ -146,14 +143,13 @@
  	       	this.data.hidden[1].value = "hidden"
         }
         this.$apply()
-        this.InitSet("trans", trans)
       } catch (error) {
         console.log(error);
       }
     }
     async onLoad() {
+    	this.get()
       this.height = wx.getSystemInfoSync().windowWidth / 1.6
-      this.Init("trans")
     }
   }
 </script>
