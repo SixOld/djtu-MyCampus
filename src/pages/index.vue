@@ -179,7 +179,7 @@
 					"openid": openid
 				})
 				wepy.showToast({
-		      title: "成功",
+		      title: "IP解绑成功",
 		      icon: 'success',
 		      duration: 2000
 		    })

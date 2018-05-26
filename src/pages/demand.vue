@@ -142,6 +142,11 @@
  	       	this.data.hidden[0].value = "table"
  	       	this.data.hidden[1].value = "hidden"
         }
+        wepy.showToast({
+		      title: "成功",
+		      icon: 'success',
+		      duration: 2000
+		    })
         this.$apply()
       } catch (error) {
         console.log(error);
