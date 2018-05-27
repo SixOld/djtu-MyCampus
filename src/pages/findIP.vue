@@ -154,16 +154,16 @@
     </form>
     <view class="{{hidden[0].value}}">
       <view class="row">
-        <view>开始ip</view>
+        <view>开始IP地址</view>
         <view>{{res.start_ip}}</view>
       </view>
       <view class="dot">......</view>
       <view class="row">
-        <view>结束ip</view>
+        <view>结束IP地址</view>
         <view>{{res.end_ip}}</view>
       </view>
       <view class="row">
-        <view>子关掩码</view>
+        <view>子网掩码</view>
         <view>{{res.Subnet}}</view>
       </view>
       <view class="row">
@@ -195,7 +195,7 @@
   export default class Find extends wepy.page {
     config = {
       navigationBarBackgroundColor: '#f6ac00',
-      navigationBarTitleText: '查ip'
+      navigationBarTitleText: '查询IP地址'
     }
     mixins = [DataMixin,HttpMixin,ToastMixin]
     changeColumn(v) {
