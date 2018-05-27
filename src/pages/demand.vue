@@ -15,8 +15,16 @@
   .hidden{
   	display: none;
   }
-  .show{
-  	text-align: center;
+  .swiper {
+    width: 100%;
+    margin-top: 40rpx;
+    swiper-item {
+      width: 100%;
+    }
+    image {
+      width: 100%;
+      height: 200rpx;
+    }
   }
   .table {
     padding: 0.5rem;
@@ -93,6 +101,32 @@
 	        <view>{{trans.userName}}</view>
 	      </view>
 	    </view>
+	    <view class="{{hidden[1].value}}">
+	      <view class="row">
+	        <view>新包月</view>
+	        <view>周期不可用</view>
+	        <view>请充值</view>
+	      </view>
+	      <view class="row">
+	        <view>账号</view>
+	        <view>{{trans.accountId}}</view>
+	      </view>
+	      <view class="row">
+	        <view>流量详情</view>
+	        <view>{{trans.flow}}</view>
+	      </view>
+	      <view class="row">
+	        <view>姓名</view>
+	        <view>{{trans.userName}}</view>
+	      </view>
+	    </view>
+	    <swiper class="swiper" autoplay="true" interval="4000" duration="1000">
+				<block wx:for="{{notices}}" wx:key="{{index}}">
+					<swiper-item>
+						<image @tap="noticeTo({{item.id}})" src="{{item.cover}}" class="slide-image" />
+					</swiper-item>
+				</block>
+			</swiper>
     </view>
   </view>
 </template>
@@ -118,12 +152,22 @@
       hidden:[{
       	value:"hidden"
       },{
-      	value:"show"
+      	value:"hidden"
       }],
+      notices: [{
+				cover: 'https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index1.jpg',
+				id: "https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/index1.jpg",
+				coverto:"index"
+			}]
     }
     computed = {
     }
     methods = {
+    	/*noticeTo(id) {
+        wepy.navigateTo({
+          url: 
+        });
+      }*/
     }
     async onPullDownRefresh() {
       try {
@@ -138,9 +182,10 @@
       	const openid = db.Get("openid")
         let trans = await this.PostWithBind('/myinfo',{"openid":openid})
         this.trans = trans
-        if(trans.status === 1){
- 	       	this.data.hidden[0].value = "table"
- 	       	this.data.hidden[1].value = "hidden"
+        if(trans.flow == null){
+ 	       	this.data.hidden[1].value = "table"
+        }else{
+        	this.data.hidden[0].value = "table"
         }
         wepy.showToast({
 		      title: "成功",
