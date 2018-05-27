@@ -188,6 +188,11 @@
 			}
 		}
 		methods = {
+			/*noticeTo(id) {
+        wepy.navigateTo({
+          url: `details?id=${id}&&from=notice`
+        })
+      },*/
 			to(item) {
 				this.navigate(item)
 			}
