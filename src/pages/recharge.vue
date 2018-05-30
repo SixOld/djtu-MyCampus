@@ -2,8 +2,8 @@
 <style lang="less">
   @import url("../less/config");
   page {
-   	background-image: url("https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/recharge.png");
-    background-position: 50% calc(~"100% + 300rpx");
+   	background-image: url("https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/recharge1.png");
+    background-position: 50% calc(~"100% + 0rpx");
     background-repeat: no-repeat;
     background-size: 100%;
     background-attachment: fixed;
@@ -55,7 +55,6 @@
       justify-content: center;
       height: 30%;
       flex-wrap: wrap;
-      background: @base-color;
       color: #fff;
       font-size: 2rem;
       text-align: center;
@@ -78,7 +77,6 @@
       display: block;
       width: 100%;
       height: calc(~"60% - 1rem");
-      background: #fefefe;
     }
   }
 </style>
@@ -111,7 +109,7 @@
   export default class Recharge extends wepy.page {
     config = {
       navigationBarTitleText: '校园网充值',
-      navigationBarBackgroundColor: '#003ec6'
+      navigationBarBackgroundColor: '#67c6e6'
     };
     mixins = [HttpMixin, ToastMixin]
     components = {}

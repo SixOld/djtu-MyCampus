@@ -80,6 +80,20 @@
 	  bottom: 2rem;
 	  width: calc(~"100% - 40rpx");
 	}
+	#egg{
+    	border-radius: 10rpx;
+      margin: 100rpx auto;
+      margin-top: 1800rpx;
+      padding: 50rpx;
+      background: rgba(255, 255, 255, 0.15);
+      width: 95%;
+      height: 700rpx;
+      image {
+      	text-align: center;
+      	width: 600rpx;
+      	height: 650rrpx;
+      }
+    }
 </style>
 
 <template>
@@ -91,6 +105,11 @@
     	<view class="help">真的要离开我们么QAQ？？</view>
       <button formType="submit">解绑微信</button>
     </form>
+    <view id="egg">
+    	<block  wx:for="{{egg}}" wx:key="{{index}}">
+    		<image src="{{item.value}}"></image>
+    	</block>
+    </view>
   </view>
 </template>
 
@@ -100,6 +119,11 @@
   import ToastMixin from "mixins/toast";
   import db from "util/db"
   export default class Unbindwx extends wepy.page {
+  	data = {
+    	egg:[{
+    		value:"https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/qrcode_for_gh_901209664f05_1280.jpg"
+    	}]
+    }
     config = {
       navigationBarTitleText: '解绑微信',
       navigationBarBackgroundColor: '#090a0f',

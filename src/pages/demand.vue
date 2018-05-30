@@ -1,7 +1,7 @@
 <style lang="less">
   page {
-    background-image: url("https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/demand.png");
-    background-position: 50% calc(~"100% + 150rpx");
+    background-image: url("https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/demand1.png");
+    background-position: 50% calc(~"100% + 0rpx");
     background-repeat: no-repeat;
     background-size: 100%;
     background-attachment: fixed;
@@ -141,7 +141,7 @@
   export default class Demand extends wepy.page {
     config = {
       navigationBarTitleText: '我的校园网',
-      navigationBarBackgroundColor: '#d32002',
+      navigationBarBackgroundColor: '#87d371',
       enablePullDownRefresh: true
     }
     mixins = [EcardMixin, HttpMixin, ToastMixin, DataMixin]

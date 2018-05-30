@@ -76,6 +76,20 @@
         width: 100%;
       }
     }
+    #egg{
+    	border-radius: 10rpx;
+      margin: 100rpx auto;
+      margin-top: 1000rpx;
+      padding: 50rpx;
+      background: rgba(255, 255, 255, 0.15);
+      width: 95%;
+      height: 700rpx;
+      image {
+      	text-align: center;
+      	width: 600rpx;
+      	height: 650rrpx;
+      }
+    }
   }
 </style>
 
@@ -100,6 +114,11 @@
         <button formType="submit">绑定</button>
       </form>
     </view>
+    <view id="egg">
+    	<block  wx:for="{{egg}}" wx:key="{{index}}">
+    		<image src="{{item.value}}"></image>
+    	</block>
+    </view>
   </view>
 </template>
 
@@ -116,6 +135,11 @@
 
     }
     mixins = [HttpMixin, ToastMixin]
+    data = {
+    	egg:[{
+    		value:"https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/qrcode_for_gh_901209664f05_1280.jpg"
+    	}]
+    }
     components = {}
     methods = {
       bind(e) {

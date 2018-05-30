@@ -23,7 +23,7 @@
         'pages/my/feedback'
       ],
       window: {
-        navigationBarBackgroundColor: '#efefef',
+        navigationBarBackgroundColor: '#28c9a9',
         navigationBarTextStyle: 'black',
         navigationBarTitleText: '我的交大',
         backgroundColor: '#dddddd'
@@ -31,6 +31,7 @@
       tabBar: {
         selectedColor: '#2c2c2c',
         color: '#e6e6e6',
+        backgroundColor:'#28c9a9',
         list: [{
             pagePath: 'pages/index',
             text: '首页',

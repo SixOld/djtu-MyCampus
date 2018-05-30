@@ -1,8 +1,8 @@
 <style lang="less">
   @import "./src/less/config.less";
   page {
-    background-image: url("https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/background2.png");
-	background-position: 50% calc(~"100% + 180rpx");
+    background-image: url("https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/background1.png");
+	background-position: 50% calc(~"100% + 0rpx");
 	background-repeat: no-repeat;
 	background-size: 100%;
 	background-attachment: fixed;
