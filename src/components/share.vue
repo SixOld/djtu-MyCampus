@@ -115,7 +115,7 @@
           // 绘制左下角引导语
           ctx.setFontSize(12);
           y += lineHeight + 8
-          ctx.fillText("长按识别我的交大", 10, y + lineHeight * 2 + 5);
+          ctx.fillText("长按识别我的校园", 10, y + lineHeight * 2 + 5);
           ctx.fillText("查看完整内容", 10, y + lineHeight * 3 + 5);
           // 绘制右下角小程序码
           const path = await this.download("/wechat/qcode?" + params);

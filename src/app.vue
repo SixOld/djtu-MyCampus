@@ -25,7 +25,7 @@
       window: {
         navigationBarBackgroundColor: '#28c9a9',
         navigationBarTextStyle: 'black',
-        navigationBarTitleText: '我的交大',
+        navigationBarTitleText: '我的校园',
         backgroundColor: '#dddddd'
       },
       tabBar: {

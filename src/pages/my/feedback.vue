@@ -135,7 +135,7 @@
     }
     onShareAppMessage(options) {
       return {
-        title: '我的交大-反馈'
+        title: '我的校园-反馈'
       }
     }
   }
