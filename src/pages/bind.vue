@@ -155,9 +155,24 @@
         this.Bind(params)
       }
     }
+    wxLogin() {
+      return new Promise((resolve, reject) => {
+        wepy.login({
+          success: res => {
+            if (res.code) {
+              resolve(res.code)
+            } else {
+              reject(res.errMsg)
+            }
+          },
+          fail: err => reject(err)
+        })
+      })
+    }
+
     async Bind(params) {
       try {
-      	params.openid = db.Get("openid")
+      	params.code = await this.wxLogin()
       	params= JSON.stringify(params)
         const res = await this.POST('/bindwx',params)
         let Base64 = require("js-base64").Base64
