@@ -56,7 +56,7 @@
   .swiper {
     width: 100%;
     z-index: 99;
-    margin-top: -40px;
+    margin-top: -47px;
     swiper-item {
       width: 100%;
     }
@@ -73,6 +73,9 @@
     font-size: 70rpx;
     height: 150rpx;
     border-bottom: 2rpx dashed #fff;
+  }
+  .kefu{
+  	margin-left: 260rpx;
   }
 </style>
 

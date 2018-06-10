@@ -10,34 +10,32 @@
 		height: 100%;
 	}
 	
-	.swiper-tab {
-		width: 100%;
-		border-bottom: 2rpx solid #777777;
+	.navbar {
+		flex: none;
+		display: flex;
+		background: #fff;
+	}
+	
+	.navbar .item {
+		position: relative;
+		flex: auto;
 		text-align: center;
 		line-height: 80rpx;
 	}
 	
-	.swiper-tab-list {
-		font-size: 30rpx;
-		display: inline-block;
-		width: 50%;
-		color: #777777;
-	}
-	
-	.on {
+	.navbar .item.active {
 		color: #67c6e6;
-		border-bottom: 5rpx solid #67c6e6;
 	}
 	
-	.swiper-box {
+	.navbar .item.active:after {
+		content: "";
 		display: block;
-		height: 100%;
-		width: 100%;
-		overflow: hidden;
-	}
-	
-	.swiper-box view {
-		text-align: center;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 4rpx;
+		background: #67c6e6;
 	}
 	
 	.help {
@@ -120,37 +118,35 @@
 
 <template>
 	<!--导航条-->
-	<view class="swiper-tab">
-		<view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" bindtap="swichNav0">有卡充值</view>
-		<view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" bindtap="swichNav1">代充值</view>
+	<view class="navbar">
+		<text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
 	</view>
 
-	<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
-		<!-- 有卡充值 -->
-		<swiper-item>
-			<form @submit="recharge" id="recharge" report-submit = "true">
-				<view class="input-group" hover-class="active">
-					<text class="input-label">账号</text>
-					<input name="userAccount" type="number" placeholder="请输入您要充值的账号" />
-				</view>
-				<view class="input-group" hover-class="active">
-					<text class="input-label">卡号</text>
-					<input name="cardno" type="text" placeholder="请输入您的充值卡号" />
-				</view>
-				<view class="input-group" hover-class="active">
-					<text class="input-label">密码</text>
-					<input name="cardpwd" type="text" placeholder="请输入充值卡的密码" />
-				</view>
-				<button formType="submit">充值</button>
-			</form>
-		</swiper-item>
-		<!-- 代充值 -->
-		<swiper-item>
-			<form @submit="pay" id="recharge" report-submit = "true">
-				<button formType="submit">充值</button>
-			</form>
-		</swiper-item>
-	</swiper>
+	<!--有卡充值-->
+	<view hidden="{{currentTab!==0}}">
+		<form @submit="recharge" id="recharge" report-submit="true">
+			<view class="input-group" hover-class="active">
+				<text class="input-label">账号</text>
+				<input name="userAccount" type="number" placeholder="请输入您要充值的账号" />
+			</view>
+			<view class="input-group" hover-class="active">
+				<text class="input-label">卡号</text>
+				<input name="cardno" type="text" placeholder="请输入您的充值卡号" />
+			</view>
+			<view class="input-group" hover-class="active">
+				<text class="input-label">密码</text>
+				<input name="cardpwd" type="text" placeholder="请输入充值卡的密码" />
+			</view>
+			<button formType="submit">充值</button>
+		</form>
+	</view>
+
+	<!--代充值-->
+	<view hidden="{{currentTab!==1}}">
+		<form @submit="pay" id="recharge" report-submit="true">
+			<button formType="submit">充值</button>
+		</form>
+	</view>
 </template>
 
 <script>
@@ -162,9 +158,9 @@
 		config = {
 			navigationBarTitleText: '校园网充值',
 			navigationBarBackgroundColor: '#67c6e6'
-		};
+		}
 		data = {
-			currentTab: 0
+			navbar: ['有卡充值', '代充值'],
 		}
 		mixins = [HttpMixin, ToastMixin]
 		components = {}
@@ -182,25 +178,17 @@
 				params.formId = e.detail.formId
 				this.Recharge(params)
 			},
-			bindChange(e) {
-				this.data.currentTab = e.detail.current
-			},
-			swichNav0(e) {
-				this.data.currentTab = 0
-				console.log(this.data)
-				this.$apply()
-			},
-			swichNav1(e){
-				this.data.currentTab = 1
-				console.log(this.data)
-				this.$apply()
+			navbarTap(e) {
+				this.setData({
+					currentTab: e.target.dataset.idx
+				})
 			},
 			pay(e) {
 				let params = e.detail
 				wepy.previewImage({
-					urls: ["https://scuplus-1251451068.coscd.myqcloud.com/q.png"],
+					urls: ["https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/pay.jpg"],
 				})
-				this.Recharge(formid)
+				this.Recharge(params.formid)
 			}
 		}
 		async Recharge(params) {
