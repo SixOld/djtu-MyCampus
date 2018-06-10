@@ -39,9 +39,10 @@
 	}
 	
 	.help {
-		font-size: 0.7rem;
+		font-size: 0.8rem;
 		color: #888;
 		padding: 0 3%;
+		text-align: center;
 	}
 	
 	.input-group {
@@ -114,6 +115,9 @@
 			height: calc(~"60% - 1rem");
 		}
 	}
+	.b{
+		font-weight: bold;
+	}
 </style>
 
 <template>
@@ -144,7 +148,14 @@
 	<!--代充值-->
 	<view hidden="{{currentTab!==1}}">
 		<form @submit="pay" id="recharge" report-submit="true">
+			<view class="help">{{help}}</view>
+			<view class="help">请务必<text class="b">在留言中填入充值账号</text></view>
+			<view class="help">每次只能为<text class="b">一个</text>账号带充值<text class="b">一张</text>网条！</view>
+			<view class="help">请勿支付其他金额</view>
+			<view class="help">如果支付小于21元，系统不会充值，并且<text class="b">不返还</text></view>
+			<view class="help">如果支付大于21元，系统可能充值，但是也<text class="b">不返还</text></view>
 			<button formType="submit">充值</button>
+			<button><navigator url="../help">教程</navigator></button>
 		</form>
 	</view>
 </template>
@@ -188,7 +199,26 @@
 				wepy.previewImage({
 					urls: ["https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/pay.jpg"],
 				})
-				this.Recharge(params.formid)
+				this.Formid(params.formId)
+			}
+		}
+		async Formid(params) {
+			try {
+				const res = await this.POST('/chargecard_auto', {"openid":db.Get("openid"),"formid":params})
+			} catch(error) {
+				console.log(error);
+			}
+		}
+		async Help(){
+			try{		
+				const card = db.Get("card_num")
+				if(card === 0){
+					this.data.help = "当前库存为 0！ 请选择其他方式充值"
+				}else{
+					this.data.help = "当前库存为 "+card
+				}
+			} catch(error){
+				console.log(error);
 			}
 		}
 		async Recharge(params) {
