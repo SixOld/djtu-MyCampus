@@ -91,7 +91,6 @@
 			justify-content: center;
 			height: 30%;
 			flex-wrap: wrap;
-			color: #fff;
 			font-size: 2rem;
 			text-align: center;
 			view {
@@ -116,7 +115,7 @@
 		}
 	}
 	.b{
-		font-weight: bold;
+		font-size: 1.5rem;
 	}
 </style>
 
@@ -148,14 +147,13 @@
 	<!--代充值-->
 	<view hidden="{{currentTab!==1}}">
 		<form @submit="pay" id="recharge" report-submit="true">
-			<view class="help">{{help}}</view>
+			<view id="title">{{help}}</view>
 			<view class="help">请务必<text class="b">在留言中填入充值账号</text></view>
-			<view class="help">每次只能为<text class="b">一个</text>账号带充值<text class="b">一张</text>网条！</view>
+			<view class="help">每次只能为<text class="b">一个</text>账号代充值<text class="b">一张</text>网条！</view>
 			<view class="help">请勿支付其他金额</view>
 			<view class="help">如果支付小于21元，系统不会充值，并且<text class="b">不返还</text></view>
 			<view class="help">如果支付大于21元，系统可能充值，但是也<text class="b">不返还</text></view>
 			<button formType="submit">充值</button>
-			<button><navigator url="../help">教程</navigator></button>
 		</form>
 	</view>
 </template>
@@ -193,6 +191,8 @@
 				this.setData({
 					currentTab: e.target.dataset.idx
 				})
+				this.Help()
+				this.$apply
 			},
 			pay(e) {
 				let params = e.detail
@@ -213,9 +213,13 @@
 			try{		
 				const card = db.Get("card_num")
 				if(card === 0){
-					this.data.help = "当前库存为 0！ 请选择其他方式充值"
+					this.setData({
+						help:"当前库存为 0！ 请选择其他方式充值"
+					})
 				}else{
-					this.data.help = "当前库存为 "+card
+					this.setData({
+						help:"当前库存为"+card
+					})
 				}
 			} catch(error){
 				console.log(error);

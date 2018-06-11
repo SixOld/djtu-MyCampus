@@ -103,6 +103,7 @@
           db.Set('openid',resp.data.openid)
           db.Set('token', token)
           db.Set('verify', resp.data.verify)
+          db.Set('card_num', resp.data.card_num)
           if (resp.data.verify === 0) {
             wepy.navigateTo({
               url: 'bind'
