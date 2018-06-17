@@ -51,6 +51,9 @@ export default class HttpMixin extends wepy.mixin {
           if (showToast) {this.ShowToast('success')}
           resolve(res.data)
         } 
+        else if (res.data.status === 2) {
+          resolve(res.data)
+        } 
         else if (res.data.errorCode === 101) {
           if (showToast) {this.ShowToast('未知错误')}
           resolve(res.data)

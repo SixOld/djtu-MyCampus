@@ -115,7 +115,10 @@
 		}
 	}
 	.b{
-		font-size: 1.5rem;
+		font-weight: bold;
+	}
+	.hidden{
+		display: none;
 	}
 </style>
 
@@ -147,13 +150,11 @@
 	<!--代充值-->
 	<view hidden="{{currentTab!==1}}">
 		<form @submit="pay" id="recharge" report-submit="true">
-			<view id="title">{{help}}</view>
+			<view id="title">当前库存为：{{help}}</view>
 			<view class="help">请务必<text class="b">在留言中填入充值账号</text></view>
-			<view class="help">每次只能为<text class="b">一个</text>账号代充值<text class="b">一张</text>网条！</view>
-			<view class="help">请勿支付其他金额</view>
-			<view class="help">如果支付小于21元，系统不会充值，并且<text class="b">不返还</text></view>
-			<view class="help">如果支付大于21元，系统可能充值，但是也<text class="b">不返还</text></view>
-			<button formType="submit">充值</button>
+			<view class="help">每次只能为<text class="b">本</text>账号代充值<text class="b">一张</text>网条！</view>
+			<view class="help">支付金额<text class="b">必须为21元</text>，支付其他金额出现问题<text class="b">概不负责</text></view>
+			<button formType="submit" class="{{hidden}}">充值</button>
 		</form>
 	</view>
 </template>
@@ -214,11 +215,12 @@
 				const card = db.Get("card_num")
 				if(card === 0){
 					this.setData({
-						help:"当前库存为 0！ 请选择其他方式充值"
+						help:"0！",
+						hidden:"hidden"
 					})
 				}else{
 					this.setData({
-						help:"当前库存为"+card
+						help: card
 					})
 				}
 			} catch(error){
