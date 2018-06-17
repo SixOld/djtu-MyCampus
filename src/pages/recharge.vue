@@ -192,7 +192,7 @@
 				this.setData({
 					currentTab: e.target.dataset.idx
 				})
-				this.Help()
+				this.card_num()
 				this.$apply
 			},
 			pay(e) {
@@ -210,17 +210,17 @@
 				console.log(error);
 			}
 		}
-		async Help(){
+		async card_num(){
 			try{		
-				const card = db.Get("card_num")
-				if(card === 0){
+				const res = await this.GET('/get_card_num')
+				if(res.card_num === 0){
 					this.setData({
 						help:"0！",
 						hidden:"hidden"
 					})
 				}else{
 					this.setData({
-						help: card
+						help: res.card_num
 					})
 				}
 			} catch(error){
@@ -242,5 +242,9 @@
 				console.log(error);
 			}
 		}
+		async onLoad() {
+		    this.card_num()
+		    this.$apply
+	   }
 	}
 </script>
