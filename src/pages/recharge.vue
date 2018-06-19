@@ -151,7 +151,7 @@
 	<view hidden="{{currentTab!==1}}">
 		<form @submit="pay" id="recharge" report-submit="true">
 			<view id="title">当前库存为：{{help}}</view>
-			<view class="help">请务必<text class="b">在留言中填入充值账号</text></view>
+			<view class="help">请务必<text class="b">在留言中填入当前绑定账号</text></view>
 			<view class="help">每次只能为<text class="b">本</text>账号代充值<text class="b">一张</text>网条！</view>
 			<view class="help">支付金额<text class="b">必须为21元</text>，支付其他金额出现问题<text class="b">概不负责</text></view>
 			<button formType="submit" class="{{hidden}}">充值</button>
@@ -167,7 +167,8 @@
 	export default class Recharge extends wepy.page {
 		config = {
 			navigationBarTitleText: '校园网充值',
-			navigationBarBackgroundColor: '#67c6e6'
+			navigationBarBackgroundColor: '#67c6e6',
+			"enablePullDownRefresh": true
 		}
 		data = {
 			navbar: ['有卡充值', '代充值'],
