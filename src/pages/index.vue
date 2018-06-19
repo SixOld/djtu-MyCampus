@@ -103,7 +103,7 @@
 			</view>
 		</view>
 		<!-- 卡片区, 置放通知卡片 -->
-		<notice iconBg="#eacdd1" icon="kechengbiao" title="公告" bg="card-schedule.png" :isShow.sync="notice" url="" footText="最新公告" noneText="暂无公告">
+		<!--<notice iconBg="#eacdd1" icon="kechengbiao" title="公告" bg="card-schedule.png" :isShow.sync="notice" url="" footText="最新公告" noneText="暂无公告">
 			<block slot="content" wx:for="{{notice}}" wx:if="{{item.course_name}}" wx:key="{{index}}">
 				<view class="card-list">
 					<view class="card-left">
@@ -111,7 +111,7 @@
 					</view>
 				</view>
 			</block>
-		</notice>
+		</notice>-->
 		<empty wx:if="{{verify == 0}}" msg="尚未绑定账号"></empty>
 	</view>
 </template>
@@ -145,12 +145,12 @@
 			verify() {
 				return db.Get('verify')
 			},
-			notice() {
+			/*notice() {
 				const notice = [{
 					course_name: "很抱歉该小程序只能连数据流量，连接djtu无法使用，如果造成不便敬请谅解"
 				}]
 				return notice
-			}
+			}*/
 		}
 		navigate(item) {
 			let url = item.url

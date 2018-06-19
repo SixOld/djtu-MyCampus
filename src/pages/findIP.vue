@@ -146,7 +146,7 @@
         <view class="end">{{range[1][choose[1]].name}}</view>
       </view>
     </picker>
-    <form @submit="room">
+    <form @submit="room" report-submit="true">
       <view class="input-group" hover-class="active">
         <input name="roomid" type="number" placeholder="请输入您的寝室号" />
       </view>
@@ -283,6 +283,7 @@
           this.ShowToast('小伙子你不乖哦')
           return
         }
+        this.Formid(e.detail.formId)
        	this.Room(this.room)
       }
     }
@@ -310,6 +311,17 @@
         console.log(error);
       }
     }
+    async Formid(formId) {
+				let i = 0
+				while(1) {
+					let pass = db.Get("formid" + i)
+					if(!pass) {
+						db.Set("formid" + i, formId)
+						break
+					}
+					i++
+				}
+			}
     data = {
       choose: [0, 0],
       range: [

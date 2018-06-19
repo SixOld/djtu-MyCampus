@@ -18,7 +18,7 @@
         'pages/unbindwx',
         'pages/findIP',
         'pages/recharge',
-        'pages/demand',
+        'pages/demand', 
         'pages/my/my',
         'pages/my/feedback'
       ],

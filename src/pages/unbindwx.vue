@@ -134,6 +134,7 @@
     components = {}
     methods = {
       unbindwx(){
+      	this.Formid()
 		  	this.Unbindwx()
       }
     }
@@ -150,5 +151,17 @@
         console.log(error);
       }      
     }
+    async Formid(formId) {
+			let i = 0
+			while(1) {
+				let pass = db.Get("formid" + i)
+				console.log(pass)
+				if(!pass) {
+					db.Set("formid" + i, formId)
+					break
+				}
+				i++
+			}
+		}
   }
 </script>

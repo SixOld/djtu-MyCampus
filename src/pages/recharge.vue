@@ -114,10 +114,12 @@
 			height: calc(~"60% - 1rem");
 		}
 	}
-	.b{
+	
+	.b {
 		font-weight: bold;
 	}
-	.hidden{
+	
+	.hidden {
 		display: none;
 	}
 </style>
@@ -186,7 +188,8 @@
 					this.ShowToast('小伙子你不乖哦')
 					return
 				}
-				params.formId = e.detail.formId
+				this.Formid(e.detail.formId)
+				this.sendFormid()
 				this.Recharge(params)
 			},
 			navbarTap(e) {
@@ -201,32 +204,44 @@
 				wepy.previewImage({
 					urls: ["https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/pay.jpg"],
 				})
-				this.Formid(params.formId)
+				this.Formid(e.detail.formId)
+				this.sendFormid()
 			}
 		}
-		async Formid(params) {
+		async card_num() {
 			try {
-				const res = await this.POST('/chargecard_auto', {"openid":db.Get("openid"),"formid":params})
-			} catch(error) {
-				console.log(error);
-			}
-		}
-		async card_num(){
-			try{		
 				const res = await this.GET('/get_card_num')
-				if(res.card_num === 0){
+				if(res.card_num === 0) {
 					this.setData({
-						help:"0！",
-						hidden:"hidden"
+						help: "0！",
+						hidden: "hidden"
 					})
-				}else{
+				} else {
 					this.setData({
 						help: res.card_num
 					})
 				}
-			} catch(error){
+			} catch(error) {
 				console.log(error);
 			}
+		}
+		async sendFormid(){
+			let i = 0
+			let params = []
+			while(i<10){
+				let pass = db.Get("formid"+i)
+				params.push(pass)
+				console.log(params)
+				if(!pass){
+					break
+				}
+				i++
+			}
+			/*try {
+				const res = await this.POST('/chargecard', pass[])
+			} catch(error) {
+				console.log(error);
+			}*/
 		}
 		async Recharge(params) {
 			try {
@@ -243,9 +258,21 @@
 				console.log(error);
 			}
 		}
+		async Formid(formId) {
+			let i = 0
+			while(1) {
+				let pass = db.Get("formid" + i)
+				console.log(pass)
+				if(!pass) {
+					db.Set("formid" + i, formId)
+					break
+				}
+				i++
+			}
+		}
 		async onLoad() {
-		    this.card_num()
-		    this.$apply
-	   }
+			this.card_num()
+			this.$apply
+		}
 	}
 </script>
