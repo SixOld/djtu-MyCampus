@@ -69,6 +69,12 @@
 					<view class="iconfont icon-arrow-right"></view>
 				</view>
 			</kefu>
+			<mview class="warn" @mtap.user="clear">
+				<view slot="content" class="list">
+					<view class="name">清空缓存</view>
+					<view class="iconfont icon-arrow-right"></view>
+				</view>
+			</mview>
 		</view>
 	</view>
 </template>
@@ -85,7 +91,7 @@
 		};
 		components = {
 			mview: MView,
-			kefu:kefu
+			kefu: kefu
 		};
 		mixins = [HttpMixin];
 		data = {
@@ -107,7 +113,33 @@
 				wepy.navigateTo({
 					url: item.url
 				});
+			},
+			clear() {
+				const self = this
+				wepy.showModal({
+					title: "确认清空缓存",
+					content: "会删除所有本地数据，需要退出小程序后重新进入！",
+					success: function(res) {
+						if(res.confirm) {
+							try {
+								// 保留token 和 verify
+								const token = db.Get("token")
+								const verify = db.Get("verify")
+								wx.clearStorageSync()
+								db.Set("token", token)
+								db.Set("verify", verify)
+								// 关闭所有页面并且跳转到首页，确保verify数据重新获取
+								wepy.reLaunch({
+									url: "/pages/index"
+								});
+							} catch(e) {
+								self.ShowToast("清空失败！")
+							}
+						}
+					}
+				})
 			}
+
 		};
 		onLoad() {}
 	}
