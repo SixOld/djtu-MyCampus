@@ -69,12 +69,12 @@
 					<view class="iconfont icon-arrow-right"></view>
 				</view>
 			</kefu>
-			<mview class="warn" @mtap.user="clear">
+			<mview2 class="warn" @mtap.user="clear">
 				<view slot="content" class="list">
 					<view class="name">清空缓存</view>
 					<view class="iconfont icon-arrow-right"></view>
 				</view>
-			</mview>
+			</mview2>
 		</view>
 	</view>
 </template>
@@ -91,6 +91,7 @@
 		};
 		components = {
 			mview: MView,
+			mview2: MView,
 			kefu: kefu
 		};
 		mixins = [HttpMixin];

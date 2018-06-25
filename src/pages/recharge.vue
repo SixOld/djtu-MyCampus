@@ -174,6 +174,7 @@
 		}
 		data = {
 			navbar: ['有卡充值', '代充值'],
+			formid:{params:0}
 		}
 		mixins = [HttpMixin, ToastMixin]
 		components = {}
@@ -205,7 +206,7 @@
 					urls: ["https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/pay.jpg"],
 				})
 				this.Formid(e.detail.formId)
-				this.sendFormid()
+				this.sendFormid(e)
 			}
 		}
 		async card_num() {
@@ -228,20 +229,21 @@
 		async sendFormid(){
 			let i = 0
 			let params = []
-			while(i<10){
+			while(2){
 				let pass = db.Get("formid"+i)
-				params.push(pass)
-				console.log(params)
+				db.Clean("formid"+i)
 				if(!pass){
 					break
 				}
+				params.push(pass)
 				i++
 			}
-			/*try {
-				const res = await this.POST('/chargecard', pass[])
+			try {
+				this.data.formid.params = params
+				const res = await this.POST('/get_json', this.data.formid)
 			} catch(error) {
 				console.log(error);
-			}*/
+			}
 		}
 		async Recharge(params) {
 			try {
@@ -262,7 +264,6 @@
 			let i = 0
 			while(1) {
 				let pass = db.Get("formid" + i)
-				console.log(pass)
 				if(!pass) {
 					db.Set("formid" + i, formId)
 					break
