@@ -11,7 +11,12 @@ const Get = (key) => {
   return wx.getStorageSync(prefix + key)
 }
 
+const Clean = (key) => {
+  return wx.removeStorage(prefix + key)
+}
+
 module.exports = {
   Set,
-  Get
+  Get,
+  Clean
 }
