@@ -27,6 +27,13 @@ const funcs = [
     bg: '#efefef',
     type: 'login'
   },
+  {
+    name: '代取快递',
+    url: 'express',
+    icon: '4',
+    bg: '#efefef',
+    type: 'login'
+  },
 /*{
     name: '课程表',
     url: 'schedule',

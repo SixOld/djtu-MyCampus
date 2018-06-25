@@ -19,6 +19,7 @@
         'pages/findIP',
         'pages/recharge',
         'pages/demand', 
+        'pages/express', 
         'pages/my/my',
         'pages/my/feedback'
       ],
