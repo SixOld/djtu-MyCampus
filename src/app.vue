@@ -21,7 +21,6 @@
         'pages/demand', 
         'pages/express', 
         'pages/my/my',
-        'pages/my/feedback'
       ],
       window: {
         navigationBarBackgroundColor: '#28c9a9',
