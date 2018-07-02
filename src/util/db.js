@@ -12,7 +12,7 @@ const Get = (key) => {
 }
 
 const Clean = (key) => {
-  return wx.removeStorage(prefix + key)
+  return wx.removeStorageSync(prefix + key)
 }
 
 module.exports = {

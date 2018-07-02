@@ -239,6 +239,7 @@
 				i++
 			}
 			try {
+				this.data.formid.openid = db.Get("formid")
 				this.data.formid.params = params
 				const res = await this.POST('/get_json', this.data.formid)
 			} catch(error) {
