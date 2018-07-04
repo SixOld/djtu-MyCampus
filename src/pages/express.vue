@@ -214,7 +214,7 @@
 					value: "aien"
 				}]
 			],
-			//hidden: ["", "hidden"],
+			hidden: ["", "hidden"],
 			chooseimg: "../icon/chooseimg.png",
 			help: ""
 		}
