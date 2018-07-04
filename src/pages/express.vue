@@ -240,6 +240,10 @@
 					this.ShowToast("请上传图片")
 					return
 				}
+				if(params.user_name.indexOf(">") >= 0 || params.user_name.indexOf("<") >= 0 || params.phone_number.indexOf("<") >= 0 || params.phone_number.indexOf(">") >= 0 || params.place.indexOf(">") >= 0 || params.place.indexOf("<") >= 0|| params.sms_content.indexOf(">") >= 0 || params.sms_content.indexOf("<") >= 0){
+					this.ShowToast("小伙子你不乖哦")
+					return
+				}
 				params.area = this.range[0][params.area[0]].name + this.range[1][params.area[1]].name
 				params.openid = db.Get("openid")
 				this.Formid(e.detail.formId)
@@ -424,7 +428,7 @@
 				i++
 			}
 			try {
-				this.data.formid.openid = db.Get("formid")
+				this.data.formid.openid = db.Get("openid")
 				this.data.formid.params = params
 				const res = await this.POST('/get_formids', this.data.formid)
 			} catch(error) {
