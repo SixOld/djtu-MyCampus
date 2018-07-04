@@ -242,7 +242,7 @@
 				}
 				params.area = this.range[0][params.area[0]].name + this.range[1][params.area[1]].name
 				params.openid = db.Get("openid")
-				console.log(params)
+				this.Formid(e.detail.formId)
 				this.upimg(params)
 			},
 			pay(e) {
@@ -250,6 +250,8 @@
 				wepy.previewImage({
 					urls: ["https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/pay.jpg"],
 				})
+				this.Formid(e.detail.formId)
+				this.sendFormid()
 			},
 			//复制到剪切板
 			Clipboard(e) {
@@ -396,6 +398,37 @@
 					name: "寝室楼",
 					value: ""
 				}]
+			}
+		}
+		async Formid(formId) {
+			let i = 0
+			while(1) {
+				let pass = db.Get("formid" + i)
+				if(!pass) {
+					db.Set("formid" + i, formId)
+					break
+				}
+				i++
+			}
+		}
+		async sendFormid(){
+			let i = 0
+			let params = []
+			while(2){
+				let pass = db.Get("formid"+i)
+				db.Clean("formid"+i)
+				if(!pass){
+					break
+				}
+				params.push(pass)
+				i++
+			}
+			try {
+				this.data.formid.openid = db.Get("formid")
+				this.data.formid.params = params
+				const res = await this.POST('/get_formids', this.data.formid)
+			} catch(error) {
+				console.log(error);
 			}
 		}
 		onLoad() {
