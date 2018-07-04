@@ -95,7 +95,7 @@
 			line-height: 52rpx;
 			padding: 0 25rpx;
 			text-align: center;
-			view{
+			view {
 				display: inline-block;
 				margin: 0 50rpx;
 			}
@@ -118,7 +118,7 @@
 			justify-content: center;
 			height: 30%;
 			flex-wrap: wrap;
-			font-size: 2rem;
+			font-size: 1.5rem;
 			text-align: center;
 			view {
 				margin-top: calc(~"15% - 1rem");
@@ -142,8 +142,6 @@
 		border-color: @base-color;
 		margin: 20rpx; // width: calc(~"100% - 40rpx");
 	}
-	
-	
 </style>
 
 <template>
@@ -160,14 +158,14 @@
 			<view class="input-group" hover-class="active">
 				<text class="area">地点</text>
 				<picker name="area" @columnchange="columnchange" @change="change" mode="multiSelector" range="{{range}}" range-key="name" value="{{choose}}">
-						<view class="start">{{range[0][choose[0]].name}}</view>
-						<view class="iconfont icon-switch"></view>
-						<view class="end">{{range[1][choose[1]].name}}</view>
+					<view class="start">{{range[0][choose[0]].name}}</view>
+					<view class="iconfont icon-switch"></view>
+					<view class="end">{{range[1][choose[1]].name}}</view>
 				</picker>
 			</view>
 			<view class="input-group" hover-class="active">
-				<text class="roomid">寝室号</text>
-				<input name="roomid" type="number" />
+				<text class="place">寝室号</text>
+				<input name="place" type="number" />
 			</view>
 			<view class="input-group" hover-class="active">
 				<text class="sms_content">内容</text>
@@ -182,9 +180,10 @@
 	</view>
 	<view id="{{hidden[1]}}">
 		<form @submit="pay" id="express" report-submit="true">
-			<view id="title">代取编号：{{help}}</view>
+			<view id="title">代取编号：<text>{{help}}</text></view>
 			<view class="help">请将代取编号填入留言中</view>
 			<view class="help">请选择两元付款，支付其他金额小程序方概不负责</view>
+			<button bindtap="Clipboard">一键复制编号</button>
 			<button formType="submit">付款</button>
 		</form>
 	</view>
@@ -198,9 +197,8 @@
 	import { domain } from '../config'
 	export default class Express extends wepy.page {
 		config = {
-			navigationBarTitleText: '校园网充值',
+			navigationBarTitleText: '校园代取',
 			navigationBarBackgroundColor: '#67c6e6',
-			"enablePullDownRefresh": true
 		}
 		data = {
 			choose: [0, 0],
@@ -216,8 +214,9 @@
 					value: "aien"
 				}]
 			],
-			hidden: ["", "hidden"],
-			chooseimg: "../icon/chooseimg.png"
+			//hidden: ["", "hidden"],
+			chooseimg: "../icon/chooseimg.png",
+			help: ""
 		}
 		mixins = [HttpMixin, ToastMixin]
 		components = {}
@@ -233,16 +232,15 @@
 			},
 			express(e) {
 				let params = e.detail.value
-				if(!params.user_name || !params.phone_number || !params.roomid || !params.sms_content) {
+				if(!params.user_name || !params.phone_number || !params.place || !params.sms_content) {
 					this.ShowToast('内容不能有空')
 					return
 				}
 				if(this.data.chooseimg === "../icon/chooseimg.png") {
-					this.ShowToast("请上传图片");
-					return;
+					this.ShowToast("请上传图片")
+					return
 				}
-				//params.area = this.area[params.area]
-				params.area = this.range[0][params.area[0]].value + this.range[1][params.area[1]].value
+				params.area = this.range[0][params.area[0]].name + this.range[1][params.area[1]].name
 				params.openid = db.Get("openid")
 				console.log(params)
 				this.upimg(params)
@@ -252,6 +250,29 @@
 				wepy.previewImage({
 					urls: ["https://raw.githubusercontent.com/SixOld/djtu-MyCampus-Six/master/img/pay.jpg"],
 				})
+			},
+			//复制到剪切板
+			Clipboard(e) {
+				let that = this
+				if(that.data.help != "") {
+					wepy.setClipboardData({
+						data: this.data.help,
+						success: function(res) {
+							wepy.showToast({
+								title: "成功",
+								icon: 'success',
+								duration: 2000
+							})
+						}
+					})
+				} else {
+					wepy.showModal({
+						title: '错误提示',
+						content: '复制失败',
+						showCancel: false,
+						success: function(res) {}
+					})
+				}
 			},
 			chooseimg(e) {
 				const that = this
@@ -263,12 +284,26 @@
 						let path = res.tempFilePaths
 						that.chooseimg = path[0]
 						that.$apply()
+					},
+					fail: function(res) {
+						wepy.showModal({
+							title: '错误提示',
+							content: '图片选择失败',
+							showCancel: false,
+							success: function(res) {}
+						})
 					}
 				})
 			}
 		}
 		async upimg(params) {
 			let that = this
+			wepy.showToast({
+				title: '正在上传...',
+				icon: 'loading',
+				mask: true,
+				duration: 10000
+			})
 			wepy.uploadFile({
 				url: domain + "/upload_exmsg",
 				filePath: that.chooseimg,
@@ -278,13 +313,23 @@
 					"Content-Type": "multipart/form-data"
 				},
 				success: function(res) {
+					wepy.hideToast()
 					let data = JSON.parse(res.data)
 					if(data.status === 1) {
-						that.setData({
-							hidden: ["hidden", ""]
-						})
+						that.hidden = ["hidden", ""]
+						that.help = data.express_spid
+						that.$apply()
 					}
 					console.log(data)
+				},
+				fail: function(res) {
+					wepy.hideToast()
+					wepy.showModal({
+						title: '错误提示',
+						content: '信息提交失败',
+						showCancel: false,
+						success: function(res) {}
+					})
 				}
 			})
 		}
